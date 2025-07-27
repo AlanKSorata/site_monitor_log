@@ -1,0 +1,48 @@
+2025-07-27 14:56:26|ERROR|Website check failed: Baidu|https://www.baidu.com|0|0|DOWN
+2025-07-27 14:56:26|INFO|DOWNTIME - Website became unavailable|https://www.baidu.com|0|0|DOWNTIME
+2025-07-27 14:56:26|ERROR|Website check failed: Xiaohongshu|https://www.xiaohongshu.com|0|0|DOWN
+2025-07-27 14:56:26|ERROR|Website check failed: Bilibili|https://www.bilibili.com|0|0|DOWN
+2025-07-27 14:56:26|INFO|DOWNTIME - Website became unavailable|https://www.xiaohongshu.com|0|0|DOWNTIME
+2025-07-27 14:56:26|INFO|DOWNTIME - Website became unavailable|https://www.bilibili.com|0|0|DOWNTIME
+2025-07-27 14:56:32|ERROR|Website check failed: Baidu|https://www.baidu.com|0|0|DOWN
+2025-07-27 14:56:32|INFO|DOWNTIME - Website became unavailable|https://www.baidu.com|0|0|DOWNTIME
+2025-07-27 14:56:32|ERROR|Website check failed: Xiaohongshu|https://www.xiaohongshu.com|0|0|DOWN
+2025-07-27 14:56:33|ERROR|Website check failed: Bilibili|https://www.bilibili.com|0|0|DOWN
+2025-07-27 14:56:33|INFO|DOWNTIME - Website became unavailable|https://www.xiaohongshu.com|0|0|DOWNTIME
+2025-07-27 14:56:33|INFO|DOWNTIME - Website became unavailable|https://www.bilibili.com|0|0|DOWNTIME
+2025-07-27 14:57:00|ERROR|Website check failed: Baidu|https://www.baidu.com|0|0|DOWN
+2025-07-27 14:57:01|ERROR|Website check failed: Bilibili|https://www.bilibili.com|0|0|DOWN
+2025-07-27 14:57:01|INFO|DOWNTIME - Website became unavailable|https://www.baidu.com|0|0|DOWNTIME
+2025-07-27 14:57:01|INFO|DOWNTIME - Website became unavailable|https://www.bilibili.com|0|0|DOWNTIME
+2025-07-27 14:57:01|ERROR|Website check failed: Xiaohongshu|https://www.xiaohongshu.com|0|0|DOWN
+2025-07-27 14:57:01|INFO|DOWNTIME - Website became unavailable|https://www.xiaohongshu.com|0|0|DOWNTIME
+2025-07-27 14:58:44|INFO|Website check successful: Baidu|https://www.baidu.com|200|425|UP
+2025-07-27 14:58:44|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|565|UP
+2025-07-27 14:58:45|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|669|UP
+2025-07-27 14:58:52|INFO|Website check successful: Baidu|https://www.baidu.com|200|327|UP
+2025-07-27 14:58:52|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|393|UP
+2025-07-27 14:58:52|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|710|UP
+2025-07-27 14:58:59|INFO|Website check successful: Baidu|https://www.baidu.com|200|317|UP
+2025-07-27 14:58:59|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|429|UP
+2025-07-27 14:58:59|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|577|UP
+2025-07-27 14:59:08|INFO|Website check successful: Baidu|https://www.baidu.com|200|497|UP
+2025-07-27 14:59:08|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|608|UP
+2025-07-27 14:59:08|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|849|UP
+2025-07-27 14:59:15|INFO|Website check successful: Baidu|https://www.baidu.com|200|381|UP
+2025-07-27 14:59:16|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|533|UP
+2025-07-27 14:59:16|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|670|UP
+2025-07-27 14:59:23|INFO|Website check successful: Baidu|https://www.baidu.com|200|312|UP
+2025-07-27 14:59:23|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|439|UP
+2025-07-27 14:59:23|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|641|UP
+2025-07-27 14:59:30|INFO|Website check successful: Baidu|https://www.baidu.com|200|318|UP
+2025-07-27 14:59:30|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|436|UP
+2025-07-27 14:59:31|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|654|UP
+2025-07-27 14:59:38|INFO|Website check successful: Baidu|https://www.baidu.com|200|364|UP
+2025-07-27 14:59:38|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|419|UP
+2025-07-27 14:59:38|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|675|UP
+2025-07-27 14:59:45|INFO|Website check successful: Baidu|https://www.baidu.com|200|397|UP
+2025-07-27 14:59:45|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|502|UP
+2025-07-27 14:59:46|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|704|UP
+2025-07-27 15:02:32|INFO|Website check successful: Baidu|https://www.baidu.com|200|331|UP
+2025-07-27 15:02:32|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|475|UP
+2025-07-27 15:02:32|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|662|UP

@@ -1,0 +1,13 @@
+Start Time: 2025-07-27 15:02:29
+Current Time: 2025-07-27 15:02:32
+Configuration: /mnt/e/pro_oriented/learn/tmp_space/config/monitor.conf
+Log Level: INFO
+Monitor Interval: 300s
+Monitor Timeout: 10s
+Max Concurrent: 5
+Content Check: true
+Active Checks: 0
+Total Websites: 3
+Available: 0
+Unavailable/Error: 0
+

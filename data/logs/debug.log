@@ -1,0 +1,18 @@
+2025-07-26 21:51:43|DEBUG|Log level changed: INFO -> DEBUG||
+2025-07-26 21:51:43|DEBUG|This is a debug message|LogDemo|Additional debug data
+2025-07-26 21:51:44|DEBUG|Starting log maintenance||
+2025-07-26 21:51:44|DEBUG|Cleaning up logs older than 30 days in: /mnt/e/pro_oriented/learn/tmp_space/data/logs||
+2025-07-26 21:51:44|DEBUG|Log cleanup completed: no old files found||
+2025-07-26 21:51:44|DEBUG|Log maintenance completed successfully||
+2025-07-26 22:19:34|DEBUG|Log level changed: INFO -> DEBUG||
+2025-07-26 22:19:34|DEBUG|Data directory structure created successfully||
+2025-07-27 13:16:50|DEBUG|Log level changed: INFO -> DEBUG||
+2025-07-27 13:16:50|DEBUG|Data directory structure created successfully||
+2025-07-27 13:23:20|DEBUG|Log level changed: INFO -> DEBUG||
+2025-07-27 13:23:20|DEBUG|Data directory structure created successfully||
+2025-07-27 13:26:09|DEBUG|Log level changed: INFO -> DEBUG||
+2025-07-27 13:26:09|DEBUG|Data directory structure created successfully||
+2025-07-27 14:26:15|DEBUG|Starting log maintenance||
+2025-07-27 14:26:15|DEBUG|Cleaning up logs older than 30 days in: /mnt/e/pro_oriented/learn/tmp_space/data/logs||
+2025-07-27 14:26:15|DEBUG|Log cleanup completed: no old files found||
+2025-07-27 14:26:15|DEBUG|Log maintenance completed successfully||
