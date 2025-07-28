@@ -1,0 +1,4 @@
+http___nonexistent_invalid_domain|failures|1|2025-07-28 19:38:54
+http___nonexistent_invalid_domain|last_failure|1753702734|2025-07-28 19:38:54
+WEBSITE_CHECK_http___nonexistent_invalid_domain|failures|1|2025-07-28 19:40:14
+WEBSITE_CHECK_http___nonexistent_invalid_domain|last_failure|1753702808|2025-07-28 19:40:14

@@ -83,7 +83,7 @@ write_log_entry() {
     local level="$1"
     local log_file="$2"
     local message="$3"
-    local additional_fields="$4"
+    local additional_fields="${4:-}"
     
     # Validate inputs
     if [ -z "$level" ] || [ -z "$log_file" ] || [ -z "$message" ]; then

@@ -14,6 +14,8 @@ DEFAULT_MAX_CONCURRENT=5
 DEFAULT_LOG_RETENTION_DAYS=30
 DEFAULT_CONTENT_CHECK_ENABLED=true
 DEFAULT_SLOW_RESPONSE_THRESHOLD=2000
+DEFAULT_CRITICAL_RESPONSE_THRESHOLD=5000
+DEFAULT_STATS_WINDOW_HOURS=24
 
 # Function: read_config_file
 # Purpose: Read and parse configuration file
@@ -68,6 +70,8 @@ load_monitor_config() {
     LOG_RETENTION_DAYS="$DEFAULT_LOG_RETENTION_DAYS"
     CONTENT_CHECK_ENABLED="$DEFAULT_CONTENT_CHECK_ENABLED"
     SLOW_RESPONSE_THRESHOLD="$DEFAULT_SLOW_RESPONSE_THRESHOLD"
+    CRITICAL_RESPONSE_THRESHOLD="$DEFAULT_CRITICAL_RESPONSE_THRESHOLD"
+    STATS_WINDOW_HOURS="$DEFAULT_STATS_WINDOW_HOURS"
     
     if file_exists "$config_file"; then
         log_info "Loading monitor configuration from: $config_file"
@@ -127,6 +131,18 @@ validate_monitor_config() {
     if ! is_number "$SLOW_RESPONSE_THRESHOLD" || [ "$SLOW_RESPONSE_THRESHOLD" -lt 100 ]; then
         validation_errors+=("SLOW_RESPONSE_THRESHOLD must be a number >= 100")
         SLOW_RESPONSE_THRESHOLD="$DEFAULT_SLOW_RESPONSE_THRESHOLD"
+    fi
+    
+    # Validate critical response threshold
+    if ! is_number "$CRITICAL_RESPONSE_THRESHOLD" || [ "$CRITICAL_RESPONSE_THRESHOLD" -lt 1000 ]; then
+        validation_errors+=("CRITICAL_RESPONSE_THRESHOLD must be a number >= 1000")
+        CRITICAL_RESPONSE_THRESHOLD="$DEFAULT_CRITICAL_RESPONSE_THRESHOLD"
+    fi
+    
+    # Validate stats window hours
+    if ! is_number "$STATS_WINDOW_HOURS" || [ "$STATS_WINDOW_HOURS" -lt 1 ]; then
+        validation_errors+=("STATS_WINDOW_HOURS must be a number >= 1")
+        STATS_WINDOW_HOURS="$DEFAULT_STATS_WINDOW_HOURS"
     fi
     
     # Validate boolean values
@@ -738,22 +754,27 @@ export_config_variables() {
     export LOG_RETENTION_DAYS
     export CONTENT_CHECK_ENABLED
     export SLOW_RESPONSE_THRESHOLD
+    export CRITICAL_RESPONSE_THRESHOLD
+    export STATS_WINDOW_HOURS
     export LOG_LEVEL
     
     log_debug "Configuration variables exported"
 }
 
+
 # Function: print_config_summary
-# Purpose: Print current configuration summary
+# Purpose: Print a summary of current configuration
 # Usage: print_config_summary
 print_config_summary() {
     echo "=== Configuration Summary ==="
-    echo "Monitor Interval: ${MONITOR_INTERVAL}s"
-    echo "Monitor Timeout: ${MONITOR_TIMEOUT}s"
-    echo "Max Concurrent Checks: ${MAX_CONCURRENT_CHECKS}"
-    echo "Log Retention Days: ${LOG_RETENTION_DAYS}"
-    echo "Content Check Enabled: ${CONTENT_CHECK_ENABLED}"
-    echo "Slow Response Threshold: ${SLOW_RESPONSE_THRESHOLD}ms"
+    echo "Monitor Interval: ${MONITOR_INTERVAL:-$DEFAULT_INTERVAL}s"
+    echo "Monitor Timeout: ${MONITOR_TIMEOUT:-$DEFAULT_TIMEOUT}s"
+    echo "Max Concurrent Checks: ${MAX_CONCURRENT_CHECKS:-$DEFAULT_MAX_CONCURRENT}"
+    echo "Log Retention Days: ${LOG_RETENTION_DAYS:-$DEFAULT_LOG_RETENTION_DAYS}"
+    echo "Content Check Enabled: ${CONTENT_CHECK_ENABLED:-$DEFAULT_CONTENT_CHECK_ENABLED}"
+    echo "Slow Response Threshold: ${SLOW_RESPONSE_THRESHOLD:-$DEFAULT_SLOW_RESPONSE_THRESHOLD}ms"
+    echo "Critical Response Threshold: ${CRITICAL_RESPONSE_THRESHOLD:-$DEFAULT_CRITICAL_RESPONSE_THRESHOLD}ms"
+    echo "Stats Window Hours: ${STATS_WINDOW_HOURS:-$DEFAULT_STATS_WINDOW_HOURS}"
     echo "Log Level: ${LOG_LEVEL:-INFO}"
     echo "============================"
 }

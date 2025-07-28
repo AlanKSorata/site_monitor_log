@@ -1,0 +1,18 @@
+2025-07-28 19:36:02|test eventual success|RETRY_ATTEMPT|Attempt 1 failed, retrying in 1s
+2025-07-28 19:36:03|test eventual success|RETRY_ATTEMPT|Attempt 2 failed, retrying in 2s
+2025-07-28 19:36:05|test eventual success|RETRY_SUCCESS|Function succeeded after 3 attempts
+2025-07-28 19:36:05|test failure|RETRY_ATTEMPT|Attempt 1 failed, retrying in 1s
+2025-07-28 19:36:07|test failure|RETRY_ATTEMPT|Attempt 2 failed, retrying in 2s
+2025-07-28 19:36:09|test failure|RETRY_EXHAUSTED|Function failed after 3 attempts
+2025-07-28 19:36:09|test_circuit_open|CIRCUIT_FAILURE|Circuit breaker recorded failure (2/3)
+2025-07-28 19:36:10|test_circuit_open|CIRCUIT_OPENED|Circuit breaker opened after 4 failures
+2025-07-28 19:36:10|test_circuit_open|CIRCUIT_BLOCKED|Circuit breaker is open, blocking request
+2025-07-28 19:36:10|test_circuit_open|CIRCUIT_BLOCKED|Circuit breaker is open, blocking request
+2025-07-28 19:36:10|test_circuit_open|CIRCUIT_BLOCKED|Circuit breaker is open, blocking request
+2025-07-28 19:36:11|test_circuit_open|CIRCUIT_BLOCKED|Circuit breaker is open, blocking request
+2025-07-28 19:36:11|test_circuit_half_open|CIRCUIT_HALF_OPEN|Circuit breaker transitioning to half-open state
+2025-07-28 19:36:11|test_circuit_half_open|CIRCUIT_CLOSED|Circuit breaker closed after successful execution
+2025-07-28 19:36:11|test_service|DEGRADATION_TRIGGERED|Primary function failed, attempting graceful degradation
+2025-07-28 19:36:11|test_service|DEGRADATION_SUCCESS|Fallback function succeeded
+2025-07-28 19:36:11|test_service|DEGRADATION_TRIGGERED|Primary function failed, attempting graceful degradation
+2025-07-28 19:36:11|test_service|DEGRADATION_FAILED|Both primary and fallback functions failed

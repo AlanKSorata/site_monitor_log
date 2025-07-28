@@ -1,0 +1,2 @@
+2025-01-28 09:00:00|INFO|Content INITIAL for https://test.example.com|https://test.example.com|INITIAL|abc123||Initial content hash
+2025-01-28 12:00:00|INFO|Content CHANGED for https://test.example.com|https://test.example.com|CHANGED|def456|abc123|Content updated

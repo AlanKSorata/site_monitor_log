@@ -1,0 +1,6 @@
+test_circuit_open|failures|4|2025-07-28 19:36:10
+test_circuit_open|last_failure|1753702569|2025-07-28 19:36:10
+test_circuit_open|state|OPEN|2025-07-28 19:36:10
+test_circuit_half_open|last_failure|1753702501|2025-07-28 19:36:11
+test_circuit_half_open|state|CLOSED|2025-07-28 19:36:11
+test_circuit_half_open|failures|0|2025-07-28 19:36:11

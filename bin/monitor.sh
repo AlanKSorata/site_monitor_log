@@ -14,6 +14,8 @@ LIB_DIR="$PROJECT_ROOT/lib"
 source "$LIB_DIR/common.sh"
 source "$LIB_DIR/config-utils.sh"
 source "$LIB_DIR/log-utils.sh"
+source "$LIB_DIR/advanced-monitoring.sh"
+source "$LIB_DIR/error-recovery.sh"
 
 # Daemon configuration
 DAEMON_NAME="website-monitor"
@@ -657,24 +659,59 @@ check_website_simple() {
 }
 
 #
-# Perform maintenance tasks
+# Perform maintenance tasks with error recovery
 #
 perform_daemon_maintenance() {
     log_debug "Starting daemon maintenance"
     
-    # Perform log maintenance
-    perform_log_maintenance
+    # Define maintenance functions with error handling
+    maintenance_log_cleanup() {
+        perform_log_maintenance
+    }
     
-    # Clean up temporary data
-    cleanup_temp_data
+    maintenance_temp_cleanup() {
+        cleanup_temp_data
+    }
     
-    # Update daemon status
-    update_daemon_status
+    maintenance_recovery_cleanup() {
+        cleanup_recovery_data
+    }
+    
+    maintenance_status_update() {
+        update_daemon_status
+    }
+    
+    # Execute maintenance tasks with retry mechanism
+    local maintenance_errors=()
+    
+    if ! retry_with_exponential_backoff maintenance_log_cleanup 2 1 "Log maintenance"; then
+        maintenance_errors+=("Log maintenance failed")
+    fi
+    
+    if ! retry_with_exponential_backoff maintenance_temp_cleanup 2 1 "Temp cleanup"; then
+        maintenance_errors+=("Temp cleanup failed")
+    fi
+    
+    if ! retry_with_exponential_backoff maintenance_recovery_cleanup 2 1 "Recovery cleanup"; then
+        maintenance_errors+=("Recovery cleanup failed")
+    fi
+    
+    if ! retry_with_exponential_backoff maintenance_status_update 2 1 "Status update"; then
+        maintenance_errors+=("Status update failed")
+    fi
+    
+    # Report maintenance results
+    if [ ${#maintenance_errors[@]} -gt 0 ]; then
+        for error in "${maintenance_errors[@]}"; do
+            log_recovery_event "DAEMON_MAINTENANCE" "MAINTENANCE_ERROR" "$error"
+        done
+        log_warn "Daemon maintenance completed with errors: ${maintenance_errors[*]}"
+    else
+        log_debug "Daemon maintenance completed successfully"
+    fi
     
     # Update last maintenance time
     DAEMON_LAST_MAINTENANCE=$(get_timestamp)
-    
-    log_debug "Daemon maintenance completed"
 }
 
 #
@@ -744,6 +781,213 @@ run_daemon_loop() {
 }
 
 #
+# Daemon health check function
+#
+daemon_health_check() {
+    # Check if daemon is running
+    if ! is_daemon_running; then
+        return 1
+    fi
+    
+    # Check if status file is recent (updated within last 2 intervals)
+    if [ -f "$STATUS_FILE" ]; then
+        local status_age
+        status_age=$(stat -c %Y "$STATUS_FILE" 2>/dev/null || stat -f %m "$STATUS_FILE" 2>/dev/null || echo 0)
+        local current_time
+        current_time=$(get_epoch_timestamp)
+        local max_age=$((DEFAULT_MAINTENANCE_INTERVAL * 2))
+        
+        if [ $((current_time - status_age)) -gt $max_age ]; then
+            log_recovery_event "DAEMON_HEALTH" "STALE_STATUS" "Status file is stale (age: $((current_time - status_age))s)"
+            return 1
+        fi
+    else
+        log_recovery_event "DAEMON_HEALTH" "MISSING_STATUS" "Status file is missing"
+        return 1
+    fi
+    
+    # Check if log files are being written to
+    if [ -f "$MAIN_LOG_FILE" ]; then
+        local log_age
+        log_age=$(stat -c %Y "$MAIN_LOG_FILE" 2>/dev/null || stat -f %m "$MAIN_LOG_FILE" 2>/dev/null || echo 0)
+        local current_time
+        current_time=$(get_epoch_timestamp)
+        local max_log_age=$((DEFAULT_MAINTENANCE_INTERVAL * 3))
+        
+        if [ $((current_time - log_age)) -gt $max_log_age ]; then
+            log_recovery_event "DAEMON_HEALTH" "STALE_LOGS" "Log file is stale (age: $((current_time - log_age))s)"
+            return 1
+        fi
+    fi
+    
+    return 0
+}
+
+#
+# Daemon recovery function
+#
+daemon_recovery() {
+    local error_message="$1"
+    local error_context="$2"
+    local exit_code="$3"
+    
+    log_recovery_event "DAEMON_RECOVERY" "RECOVERY_INITIATED" "Attempting daemon recovery: $error_message"
+    
+    # Try to restart the daemon
+    if daemon_recovery_restart "$DAEMON_NAME" "$0" 3 10; then
+        log_recovery_event "DAEMON_RECOVERY" "RECOVERY_SUCCESS" "Daemon successfully recovered"
+        return 0
+    else
+        log_recovery_event "DAEMON_RECOVERY" "RECOVERY_FAILED" "Daemon recovery failed"
+        return 1
+    fi
+}
+
+#
+# Start daemon health monitoring (runs in background)
+#
+start_daemon_health_monitoring() {
+    if [ "$DAEMON_MODE" = "daemon" ]; then
+        # Start health monitoring in background
+        (
+            health_check_with_recovery "$DAEMON_NAME" daemon_health_check daemon_recovery 60 3
+        ) &
+        
+        local health_monitor_pid=$!
+        echo "$health_monitor_pid" > "${PID_FILE}.health"
+        log_info "Daemon health monitoring started (PID: $health_monitor_pid)"
+    fi
+}
+
+#
+# Stop daemon health monitoring
+#
+stop_daemon_health_monitoring() {
+    local health_pid_file="${PID_FILE}.health"
+    
+    if [ -f "$health_pid_file" ]; then
+        local health_pid
+        health_pid=$(cat "$health_pid_file" 2>/dev/null)
+        
+        if [ -n "$health_pid" ] && kill -0 "$health_pid" 2>/dev/null; then
+            kill -TERM "$health_pid" 2>/dev/null
+            log_info "Daemon health monitoring stopped"
+        fi
+        
+        rm -f "$health_pid_file"
+    fi
+}
+
+#
+# Enhanced daemon startup with health monitoring
+#
+start_daemon_enhanced() {
+    if is_daemon_running; then
+        echo "Daemon is already running"
+        exit 3
+    fi
+
+    echo "Starting website monitoring daemon with enhanced error recovery..."
+
+    # Initialize daemon environment
+    init_daemon
+
+    # Create lock file
+    if ! create_lock_file "$LOCK_FILE"; then
+        die "Failed to create lock file" 1
+    fi
+
+    # Set up signal handlers for graceful shutdown
+    setup_daemon_signal_handlers
+
+    if [ "$DAEMON_MODE" = "daemon" ]; then
+        # Fork to background
+        (
+            # Redirect output to log files
+            exec >> "$MAIN_LOG_FILE" 2>&1
+            
+            # Run main daemon loop
+            run_daemon_loop
+        ) &
+        
+        local daemon_pid=$!
+        echo "$daemon_pid" > "$PID_FILE"
+        
+        # Wait a moment to ensure daemon started successfully
+        sleep 2
+        
+        if kill -0 "$daemon_pid" 2>/dev/null; then
+            echo "Daemon started successfully (PID: $daemon_pid)"
+            log_info "Website monitoring daemon started in background mode"
+            
+            # Start health monitoring
+            start_daemon_health_monitoring
+        else
+            echo "Failed to start daemon"
+            exit 1
+        fi
+    else
+        # Run in foreground
+        echo $ > "$PID_FILE"
+        echo "Running in foreground mode (Ctrl+C to stop)..."
+        log_info "Website monitoring daemon started in foreground mode"
+        run_daemon_loop
+    fi
+}
+
+#
+# Enhanced daemon stop with health monitoring cleanup
+#
+stop_daemon_enhanced() {
+    local no_exit="${1:-}"
+    
+    if ! is_daemon_running; then
+        echo "Daemon is not running"
+        if [ "$no_exit" = "no_exit" ]; then
+            return 4
+        else
+            exit 4
+        fi
+    fi
+
+    local pid
+    pid=$(cat "$PID_FILE" 2>/dev/null)
+
+    echo "Stopping website monitoring daemon (PID: $pid)..."
+
+    # Stop health monitoring first
+    stop_daemon_health_monitoring
+
+    # Send TERM signal for graceful shutdown
+    if kill -TERM "$pid" 2>/dev/null; then
+        # Wait for graceful shutdown
+        local wait_count=0
+        while [ $wait_count -lt 30 ] && kill -0 "$pid" 2>/dev/null; do
+            sleep 1
+            wait_count=$((wait_count + 1))
+        done
+
+        # Force kill if still running
+        if kill -0 "$pid" 2>/dev/null; then
+            echo "Daemon did not stop gracefully, forcing shutdown..."
+            kill -KILL "$pid" 2>/dev/null
+        fi
+
+        # Clean up files
+        rm -f "$PID_FILE" "$LOCK_FILE" "$STATUS_FILE"
+        echo "Daemon stopped successfully"
+        return 0
+    else
+        echo "Failed to stop daemon"
+        if [ "$no_exit" = "no_exit" ]; then
+            return 1
+        else
+            exit 1
+        fi
+    fi
+}
+
+#
 # Main execution function
 #
 main() {
@@ -753,19 +997,26 @@ main() {
     # Execute command
     case "$DAEMON_COMMAND" in
         start)
-            start_daemon
+            start_daemon_enhanced
             ;;
         stop)
-            stop_daemon
+            stop_daemon_enhanced
             ;;
         restart)
-            restart_daemon
+            echo "Restarting website monitoring daemon..."
+            if is_daemon_running; then
+                stop_daemon_enhanced "no_exit"
+                sleep 2
+            fi
+            start_daemon_enhanced
             ;;
         status)
             get_daemon_status
+            echo ""
+            get_recovery_statistics
             ;;
         reload)
-            reload_daemon_config
+            handle_config_reload
             ;;
         test)
             test_configuration

@@ -1,48 +1,36 @@
-2025-07-27 14:56:26|ERROR|Website check failed: Baidu|https://www.baidu.com|0|0|DOWN
-2025-07-27 14:56:26|INFO|DOWNTIME - Website became unavailable|https://www.baidu.com|0|0|DOWNTIME
-2025-07-27 14:56:26|ERROR|Website check failed: Xiaohongshu|https://www.xiaohongshu.com|0|0|DOWN
-2025-07-27 14:56:26|ERROR|Website check failed: Bilibili|https://www.bilibili.com|0|0|DOWN
-2025-07-27 14:56:26|INFO|DOWNTIME - Website became unavailable|https://www.xiaohongshu.com|0|0|DOWNTIME
-2025-07-27 14:56:26|INFO|DOWNTIME - Website became unavailable|https://www.bilibili.com|0|0|DOWNTIME
-2025-07-27 14:56:32|ERROR|Website check failed: Baidu|https://www.baidu.com|0|0|DOWN
-2025-07-27 14:56:32|INFO|DOWNTIME - Website became unavailable|https://www.baidu.com|0|0|DOWNTIME
-2025-07-27 14:56:32|ERROR|Website check failed: Xiaohongshu|https://www.xiaohongshu.com|0|0|DOWN
-2025-07-27 14:56:33|ERROR|Website check failed: Bilibili|https://www.bilibili.com|0|0|DOWN
-2025-07-27 14:56:33|INFO|DOWNTIME - Website became unavailable|https://www.xiaohongshu.com|0|0|DOWNTIME
-2025-07-27 14:56:33|INFO|DOWNTIME - Website became unavailable|https://www.bilibili.com|0|0|DOWNTIME
-2025-07-27 14:57:00|ERROR|Website check failed: Baidu|https://www.baidu.com|0|0|DOWN
-2025-07-27 14:57:01|ERROR|Website check failed: Bilibili|https://www.bilibili.com|0|0|DOWN
-2025-07-27 14:57:01|INFO|DOWNTIME - Website became unavailable|https://www.baidu.com|0|0|DOWNTIME
-2025-07-27 14:57:01|INFO|DOWNTIME - Website became unavailable|https://www.bilibili.com|0|0|DOWNTIME
-2025-07-27 14:57:01|ERROR|Website check failed: Xiaohongshu|https://www.xiaohongshu.com|0|0|DOWN
-2025-07-27 14:57:01|INFO|DOWNTIME - Website became unavailable|https://www.xiaohongshu.com|0|0|DOWNTIME
-2025-07-27 14:58:44|INFO|Website check successful: Baidu|https://www.baidu.com|200|425|UP
-2025-07-27 14:58:44|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|565|UP
-2025-07-27 14:58:45|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|669|UP
-2025-07-27 14:58:52|INFO|Website check successful: Baidu|https://www.baidu.com|200|327|UP
-2025-07-27 14:58:52|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|393|UP
-2025-07-27 14:58:52|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|710|UP
-2025-07-27 14:58:59|INFO|Website check successful: Baidu|https://www.baidu.com|200|317|UP
-2025-07-27 14:58:59|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|429|UP
-2025-07-27 14:58:59|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|577|UP
-2025-07-27 14:59:08|INFO|Website check successful: Baidu|https://www.baidu.com|200|497|UP
-2025-07-27 14:59:08|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|608|UP
-2025-07-27 14:59:08|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|849|UP
-2025-07-27 14:59:15|INFO|Website check successful: Baidu|https://www.baidu.com|200|381|UP
-2025-07-27 14:59:16|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|533|UP
-2025-07-27 14:59:16|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|670|UP
-2025-07-27 14:59:23|INFO|Website check successful: Baidu|https://www.baidu.com|200|312|UP
-2025-07-27 14:59:23|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|439|UP
-2025-07-27 14:59:23|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|641|UP
-2025-07-27 14:59:30|INFO|Website check successful: Baidu|https://www.baidu.com|200|318|UP
-2025-07-27 14:59:30|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|436|UP
-2025-07-27 14:59:31|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|654|UP
-2025-07-27 14:59:38|INFO|Website check successful: Baidu|https://www.baidu.com|200|364|UP
-2025-07-27 14:59:38|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|419|UP
-2025-07-27 14:59:38|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|675|UP
-2025-07-27 14:59:45|INFO|Website check successful: Baidu|https://www.baidu.com|200|397|UP
-2025-07-27 14:59:45|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|502|UP
-2025-07-27 14:59:46|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|704|UP
-2025-07-27 15:02:32|INFO|Website check successful: Baidu|https://www.baidu.com|200|331|UP
-2025-07-27 15:02:32|INFO|Website check successful: Bilibili|https://www.bilibili.com|200|475|UP
-2025-07-27 15:02:32|INFO|Website check successful: Xiaohongshu|https://www.xiaohongshu.com|200|662|UP
+2025-01-28 10:00:00|INFO|Website check successful: Test Site|https://test.example.com|200|150|UP
+2025-01-28 10:01:00|ERROR|Website check failed: Test Site|https://test.example.com|0|0|DOWN
+2025-01-28 10:02:00|WARN|Website responding slowly: Test Site|https://test.example.com|200|2500|SLOW
+2025-01-28 10:03:00|INFO|Website check successful: Another Site|https://another.example.com|200|300|UP
+2025-01-28 10:04:00|ERROR|Website timeout: Another Site|https://another.example.com|0|0|TIMEOUT
+2025-01-28 10:05:00|INFO|Website recovered: Test Site|https://test.example.com|200|200|UP
+2025-07-28 18:12:09|WARN|SLOW_RESPONSE: 4221ms > 2000ms for https://httpbin.org/delay/3 - Response time above threshold|https://httpbin.org/delay/3|0|4221|SLOW
+2025-07-28 18:14:06|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|https://httpbin.org/status/404|404|1600|ERROR
+2025-07-28 18:36:54|WARN|SLOW_RESPONSE: 2191ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2191|SLOW
+2025-07-28 18:36:59|WARN|SLOW_RESPONSE: 4300ms > 2000ms for https://httpbin.org/delay/3 - Response time above threshold|https://httpbin.org/delay/3|0|4300|SLOW
+2025-07-28 18:37:01|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|https://httpbin.org/status/500|500|1128|ERROR
+2025-07-28 18:43:24|INFO|CRITICAL_RESPONSE: 7461ms > 5000ms for https://httpbin.org/delay/6 - Response time critically high|https://httpbin.org/delay/6|0|7461|CRITICAL
+2025-07-28 19:36:02|INFO|Attempt 1 failed, retrying in 1s|test eventual success|0|0|INFO
+2025-07-28 19:36:03|INFO|Attempt 2 failed, retrying in 2s|test eventual success|0|0|INFO
+2025-07-28 19:36:05|INFO|Function succeeded after 3 attempts|test eventual success|0|0|RECOVERY
+2025-07-28 19:36:05|INFO|Attempt 1 failed, retrying in 1s|test failure|0|0|INFO
+2025-07-28 19:36:07|INFO|Attempt 2 failed, retrying in 2s|test failure|0|0|INFO
+2025-07-28 19:36:09|ERROR|Function failed after 3 attempts|test failure|0|0|ERROR
+2025-07-28 19:36:09|INFO|Circuit breaker recorded failure (2/3)|test_circuit_open|0|0|INFO
+2025-07-28 19:36:10|ERROR|Circuit breaker opened after 4 failures|test_circuit_open|0|0|ERROR
+2025-07-28 19:36:10|INFO|Circuit breaker is open, blocking request|test_circuit_open|0|0|INFO
+2025-07-28 19:36:10|INFO|Circuit breaker is open, blocking request|test_circuit_open|0|0|INFO
+2025-07-28 19:36:10|INFO|Circuit breaker is open, blocking request|test_circuit_open|0|0|INFO
+2025-07-28 19:36:11|INFO|Circuit breaker is open, blocking request|test_circuit_open|0|0|INFO
+2025-07-28 19:36:11|INFO|Circuit breaker transitioning to half-open state|test_circuit_half_open|0|0|INFO
+2025-07-28 19:36:11|INFO|Circuit breaker closed after successful execution|test_circuit_half_open|0|0|RECOVERY
+2025-07-28 19:36:11|INFO|Primary function failed, attempting graceful degradation|test_service|0|0|INFO
+2025-07-28 19:36:11|INFO|Fallback function succeeded|test_service|0|0|INFO
+2025-07-28 19:36:11|INFO|Primary function failed, attempting graceful degradation|test_service|0|0|INFO
+2025-07-28 19:36:11|INFO|Both primary and fallback functions failed|test_service|0|0|INFO
+2025-07-28 19:38:54|ERROR|Function not found: 2
+2025-07-28 19:38:54|INFO|Circuit breaker recorded failure (1/http_check_wrapper)|http___nonexistent_invalid_domain|0|0|INFO
+2025-07-28 19:40:08|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://nonexistent.invalid.domain|0|0|INFO
+2025-07-28 19:40:10|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://nonexistent.invalid.domain|0|0|INFO
+2025-07-28 19:40:14|ERROR|Function failed after 3 attempts|HTTP check for http://nonexistent.invalid.domain|0|0|ERROR
+2025-07-28 19:40:14|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___nonexistent_invalid_domain|0|0|INFO

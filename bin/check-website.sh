@@ -13,6 +13,8 @@ LIB_DIR="$PROJECT_ROOT/lib"
 # Source required libraries
 source "$LIB_DIR/common.sh"
 source "$LIB_DIR/http-utils.sh"
+source "$LIB_DIR/advanced-monitoring.sh"
+source "$LIB_DIR/error-recovery.sh"
 
 # Default configuration
 DEFAULT_TIMEOUT=10
@@ -356,7 +358,7 @@ check_content_changes() {
 }
 
 #
-# Perform website check with retry mechanism
+# Perform website check with enhanced error recovery
 #
 perform_website_check() {
     local url="$1"
@@ -365,107 +367,113 @@ perform_website_check() {
     local retry_delay="$4"
     local content_check="$5"
     
-    local attempt=1
-    local max_attempts=$((retries + 1))
-    local check_result
     local content_hash=""
     local content_changed=false
     
-    while [ $attempt -le $max_attempts ]; do
-        if [ "$CHECK_VERBOSE" = true ]; then
-            log_info "Attempt $attempt/$max_attempts: Checking $url"
-        fi
-        
-        # Perform HTTP check
-        http_check_website "$url" "$timeout"
-        check_result=$?
-        
-        # Set global variables from HTTP check
-        CHECK_STATUS_CODE="$HTTP_STATUS_CODE"
-        CHECK_RESPONSE_TIME="$HTTP_RESPONSE_TIME_MS"
-        CHECK_ERROR_MESSAGE="$HTTP_ERROR_MESSAGE"
-        
-        # Determine status based on HTTP check result
-        if [ $check_result -eq 0 ]; then
+    # Define HTTP check wrapper function for retry mechanism
+    http_check_with_recovery() {
+        # Use the enhanced HTTP check with recovery
+        if http_check_website_with_recovery "$url" "$timeout" "$retries" "$retry_delay"; then
+            # Set global variables from HTTP check
+            CHECK_STATUS_CODE="$HTTP_STATUS_CODE"
+            CHECK_RESPONSE_TIME="$HTTP_RESPONSE_TIME_MS"
+            CHECK_ERROR_MESSAGE="$HTTP_ERROR_MESSAGE"
+            
             if http_is_website_available "$CHECK_STATUS_CODE"; then
                 CHECK_STATUS="available"
                 
+                # Process response time with advanced monitoring
+                process_response_time "$url" "$CHECK_RESPONSE_TIME" "$CHECK_STATUS_CODE" "$CHECK_STATUS"
+                
                 # Perform content check if enabled
                 if [ "$content_check" = true ]; then
-                    content_hash=$(calculate_content_hash "$url" "$timeout")
-                    if [ -n "$content_hash" ]; then
-                        CHECK_CONTENT_HASH="$content_hash"
-                        if ! check_content_changes "$url" "$content_hash"; then
-                            content_changed=true
-                            if [ "$CHECK_VERBOSE" = true ]; then
-                                log_info "Content change detected for $url: $CONTENT_CHANGE_SUMMARY"
+                    # Use robust content fetching with retry
+                    local temp_content_file
+                    temp_content_file=$(mktemp) || {
+                        log_error_detailed "Failed to create temporary file for content check"
+                        return 1
+                    }
+                    
+                    if http_fetch_content_robust "$url" "$temp_content_file" "$timeout" "$retries"; then
+                        content_hash=$(sha256sum "$temp_content_file" 2>/dev/null | cut -d' ' -f1)
+                        rm -f "$temp_content_file"
+                        
+                        if [ -n "$content_hash" ]; then
+                            CHECK_CONTENT_HASH="$content_hash"
+                            if ! check_content_changes "$url" "$content_hash"; then
+                                content_changed=true
+                                if [ "$CHECK_VERBOSE" = true ]; then
+                                    log_info "Content change detected for $url: $CONTENT_CHANGE_SUMMARY"
+                                fi
+                            else
+                                if [ "$CHECK_VERBOSE" = true ]; then
+                                    log_debug "Content check for $url: $CONTENT_CHANGE_SUMMARY"
+                                fi
                             fi
                         else
-                            if [ "$CHECK_VERBOSE" = true ]; then
-                                log_debug "Content check for $url: $CONTENT_CHANGE_SUMMARY"
-                            fi
+                            log_error_detailed "Failed to calculate content hash for $url"
+                            log_content_change "$url" "ERROR" "" "" "Content hash calculation failed"
                         fi
                     else
-                        # Handle content fetch errors gracefully
-                        if [ -n "$CONTENT_FETCH_ERROR" ]; then
-                            if [ "$CHECK_VERBOSE" = true ]; then
-                                log_warn "Content hash calculation failed for $url: $CONTENT_FETCH_ERROR"
-                            fi
-                            # Log the content fetch failure
-                            log_content_change "$url" "ERROR" "" "" "Content fetch failed: $CONTENT_FETCH_ERROR"
-                        else
-                            if [ "$CHECK_VERBOSE" = true ]; then
-                                log_warn "Failed to calculate content hash for $url: unknown error"
-                            fi
-                        fi
+                        rm -f "$temp_content_file"
+                        log_error_detailed "Failed to fetch content for hash calculation: $url"
+                        log_content_change "$url" "ERROR" "" "" "Content fetch failed for hash calculation"
                     fi
                 fi
                 
-                # Success - break out of retry loop
-                break
+                return 0
             else
                 CHECK_STATUS="unavailable"
                 CHECK_ERROR_MESSAGE="HTTP status indicates unavailable: $(http_get_status_description "$CHECK_STATUS_CODE")"
-                # Don't retry for HTTP error status codes - they're not network errors
-                break
+                
+                # Log enhanced error information for unavailable status
+                log_enhanced_error "$url" "$CHECK_STATUS_CODE" "$CHECK_RESPONSE_TIME" "$CHECK_ERROR_MESSAGE" "HTTP status check failed"
+                
+                return 1
             fi
         else
+            local exit_code=$?
             CHECK_STATUS="error"
-            # Error message already set by http_check_website
             
-            # If this was the last attempt, break
-            if [ $attempt -eq $max_attempts ]; then
-                break
-            fi
+            # Set global variables from HTTP check (may be empty on complete failure)
+            CHECK_STATUS_CODE="${HTTP_STATUS_CODE:-0}"
+            CHECK_RESPONSE_TIME="${HTTP_RESPONSE_TIME_MS:-0}"
+            CHECK_ERROR_MESSAGE="${HTTP_ERROR_MESSAGE:-Unknown error occurred}"
             
-            # Wait before retry (only for actual network errors)
-            if [ "$CHECK_VERBOSE" = true ]; then
-                log_warn "Check failed, retrying in ${retry_delay} seconds..."
-            fi
-            sleep "$retry_delay"
-            attempt=$((attempt + 1))
-            continue
+            # Handle comprehensive error logging
+            handle_comprehensive_error "$CHECK_ERROR_MESSAGE" "WEBSITE_CHECK_$url" "$exit_code" "http_recovery_function"
+            
+            return $exit_code
         fi
-    done
+    }
     
-    # Add content change information to status if applicable
-    if [ "$content_changed" = true ]; then
-        if [ -n "$CHECK_ERROR_MESSAGE" ]; then
-            CHECK_ERROR_MESSAGE="$CHECK_ERROR_MESSAGE; Content changed"
-        else
-            CHECK_ERROR_MESSAGE="Content changed"
+    # Execute the check with circuit breaker protection
+    local circuit_name
+    circuit_name=$(echo "WEBSITE_CHECK_$url" | sed 's|[^a-zA-Z0-9]|_|g')
+    
+    if circuit_breaker "$circuit_name" http_check_with_recovery; then
+        # Add content change information to status if applicable
+        if [ "$content_changed" = true ]; then
+            if [ -n "$CHECK_ERROR_MESSAGE" ]; then
+                CHECK_ERROR_MESSAGE="$CHECK_ERROR_MESSAGE; Content changed"
+            else
+                CHECK_ERROR_MESSAGE="Content changed"
+            fi
         fi
+        
+        return 0
+    else
+        local exit_code=$?
+        
+        # Handle circuit breaker open state
+        if [ $exit_code -eq 2 ]; then
+            CHECK_STATUS="circuit_open"
+            CHECK_ERROR_MESSAGE="Circuit breaker is open for this URL"
+            log_recovery_event "WEBSITE_CHECK_$url" "CIRCUIT_BREAKER_BLOCKED" "Website check blocked by circuit breaker"
+        fi
+        
+        return $exit_code
     fi
-    
-    # Return appropriate exit code
-    case "$CHECK_STATUS" in
-        available)
-            return 0
-            ;;
-        *)
-            return 1
-            ;;
-    esac
 }
 
 #
