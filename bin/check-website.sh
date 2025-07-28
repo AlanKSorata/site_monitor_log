@@ -32,6 +32,7 @@ CHECK_RESPONSE_TIME=""
 CHECK_CONTENT_HASH=""
 CHECK_STATUS=""
 CHECK_ERROR_MESSAGE=""
+CONTENT_CHANGE_SUMMARY=""
 
 #
 # Display usage information
@@ -540,6 +541,13 @@ main() {
     
     # Parse command line arguments
     parse_arguments "$@"
+    
+    # Reset circuit breaker if in testing mode (localhost URLs or TEST_MODE env var)
+    if [ "${TEST_MODE:-false}" = "true" ] || echo "$CHECK_URL" | grep -q "localhost"; then
+        local circuit_name
+        circuit_name=$(echo "WEBSITE_CHECK_$CHECK_URL" | sed 's|[^a-zA-Z0-9]|_|g')
+        reset_circuit_breaker "$circuit_name" >/dev/null 2>&1
+    fi
     
     # Set timestamp
     CHECK_TIMESTAMP=$(get_timestamp)

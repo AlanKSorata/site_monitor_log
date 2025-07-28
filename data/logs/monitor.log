@@ -34,3 +34,699 @@
 2025-07-28 19:40:10|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://nonexistent.invalid.domain|0|0|INFO
 2025-07-28 19:40:14|ERROR|Function failed after 3 attempts|HTTP check for http://nonexistent.invalid.domain|0|0|ERROR
 2025-07-28 19:40:14|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___nonexistent_invalid_domain|0|0|INFO
+2025-07-28 19:58:31|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|210|ERROR
+2025-07-28 19:58:31|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 19:58:41|WARN|SLOW_RESPONSE: 2120ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2120|SLOW
+2025-07-28 19:58:42|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|216|ERROR
+2025-07-28 19:58:43|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 19:58:44|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8083/notfound|404|211|ERROR
+2025-07-28 19:58:44|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8083_notfound|0|0|INFO
+2025-07-28 19:58:45|ERROR|Forbidden - Access denied - HTTP status indicates unavailable: Forbidden (HTTP status check failed)|http://localhost:8083/forbidden|403|212|ERROR
+2025-07-28 19:58:45|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8083_forbidden|0|0|INFO
+2025-07-28 19:58:46|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 19:58:49|INFO|Attempt 2 failed, retrying in 5s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 19:58:54|INFO|Attempt 3 failed, retrying in 6s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 19:59:00|ERROR|Function failed after 4 attempts|HTTP check for http://invalid-host-12345.com|0|0|ERROR
+2025-07-28 19:59:00|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___invalid_host_12345_com|0|0|INFO
+2025-07-28 19:59:04|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 19:59:04|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 19:59:04|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 19:59:06|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 19:59:06|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 19:59:06|INFO|Attempt 2 failed, retrying in 5s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 19:59:11|INFO|Attempt 3 failed, retrying in 9s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 19:59:11|INFO|Attempt 3 failed, retrying in 8s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 19:59:12|INFO|Attempt 3 failed, retrying in 9s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 19:59:19|ERROR|Function failed after 4 attempts|HTTP check for https://test.example.com|0|0|ERROR
+2025-07-28 19:59:19|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___test_example_com|0|0|INFO
+2025-07-28 19:59:20|ERROR|Website check failed: Test Site - HTTP status indicates unavailable: HTTP |https://test.example.com|0|225|DOWN
+2025-07-28 19:59:20|INFO|DOWNTIME - Website became unavailable|https://test.example.com|0|0|DOWNTIME
+2025-07-28 19:59:20|ERROR|Function failed after 4 attempts|HTTP check for https://third.example.com|0|0|ERROR
+2025-07-28 19:59:20|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___third_example_com|0|0|INFO
+2025-07-28 19:59:20|ERROR|Website check failed: Third Site - HTTP status indicates unavailable: HTTP |https://third.example.com|0|216|DOWN
+2025-07-28 19:59:21|INFO|DOWNTIME - Website became unavailable|https://third.example.com|0|0|DOWNTIME
+2025-07-28 19:59:21|ERROR|Function failed after 4 attempts|HTTP check for https://another.example.com|0|0|ERROR
+2025-07-28 19:59:21|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___another_example_com|0|0|INFO
+2025-07-28 19:59:21|ERROR|Website check failed: Another Site - HTTP status indicates unavailable: HTTP |https://another.example.com|0|135|DOWN
+2025-07-28 19:59:22|INFO|DOWNTIME - Website became unavailable|https://another.example.com|0|0|DOWNTIME
+2025-07-28 20:00:52|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|205|ERROR
+2025-07-28 20:00:52|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:01:02|WARN|SLOW_RESPONSE: 2104ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2104|SLOW
+2025-07-28 20:01:03|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|204|ERROR
+2025-07-28 20:01:04|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:01:05|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8083/notfound|404|204|ERROR
+2025-07-28 20:01:05|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___localhost_8083_notfound|0|0|INFO
+2025-07-28 20:01:06|ERROR|Forbidden - Access denied - HTTP status indicates unavailable: Forbidden (HTTP status check failed)|http://localhost:8083/forbidden|403|210|ERROR
+2025-07-28 20:01:06|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___localhost_8083_forbidden|0|0|INFO
+2025-07-28 20:01:07|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:01:09|INFO|Attempt 2 failed, retrying in 5s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:01:14|INFO|Attempt 3 failed, retrying in 6s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:01:20|ERROR|Function failed after 4 attempts|HTTP check for http://invalid-host-12345.com|0|0|ERROR
+2025-07-28 20:01:21|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___invalid_host_12345_com|0|0|INFO
+2025-07-28 20:01:24|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:01:24|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:01:24|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 20:01:27|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:01:27|INFO|Attempt 2 failed, retrying in 5s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:01:27|INFO|Attempt 2 failed, retrying in 5s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 20:01:31|INFO|Attempt 3 failed, retrying in 10s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:01:32|INFO|Attempt 3 failed, retrying in 7s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:01:32|INFO|Attempt 3 failed, retrying in 7s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 20:01:39|ERROR|Function failed after 4 attempts|HTTP check for https://test.example.com|0|0|ERROR
+2025-07-28 20:01:39|ERROR|Function failed after 4 attempts|HTTP check for https://another.example.com|0|0|ERROR
+2025-07-28 20:01:39|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_https___test_example_com|0|0|INFO
+2025-07-28 20:01:39|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_https___another_example_com|0|0|INFO
+2025-07-28 20:01:39|ERROR|Website check failed: Test Site - HTTP status indicates unavailable: HTTP |https://test.example.com|0|74|DOWN
+2025-07-28 20:01:39|ERROR|Website check failed: Another Site - HTTP status indicates unavailable: HTTP |https://another.example.com|0|80|DOWN
+2025-07-28 20:01:39|INFO|DOWNTIME - Website became unavailable|https://test.example.com|0|0|DOWNTIME
+2025-07-28 20:01:39|INFO|DOWNTIME - Website became unavailable|https://another.example.com|0|0|DOWNTIME
+2025-07-28 20:01:41|ERROR|Function failed after 4 attempts|HTTP check for https://third.example.com|0|0|ERROR
+2025-07-28 20:01:41|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_https___third_example_com|0|0|INFO
+2025-07-28 20:01:41|ERROR|Website check failed: Third Site - HTTP status indicates unavailable: HTTP |https://third.example.com|0|91|DOWN
+2025-07-28 20:01:41|INFO|DOWNTIME - Website became unavailable|https://third.example.com|0|0|DOWNTIME
+2025-07-28 20:01:58|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|207|ERROR
+2025-07-28 20:01:59|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:02:10|WARN|SLOW_RESPONSE: 2108ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2108|SLOW
+2025-07-28 20:02:11|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|233|ERROR
+2025-07-28 20:02:12|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:02:13|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8083/notfound|404|218|ERROR
+2025-07-28 20:02:13|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8083_notfound|0|0|INFO
+2025-07-28 20:02:14|ERROR|Forbidden - Access denied - HTTP status indicates unavailable: Forbidden (HTTP status check failed)|http://localhost:8083/forbidden|403|303|ERROR
+2025-07-28 20:02:14|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8083_forbidden|0|0|INFO
+2025-07-28 20:02:15|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:02:18|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:02:21|INFO|Attempt 3 failed, retrying in 8s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:02:29|ERROR|Function failed after 4 attempts|HTTP check for http://invalid-host-12345.com|0|0|ERROR
+2025-07-28 20:02:29|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___invalid_host_12345_com|0|0|INFO
+2025-07-28 20:02:33|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:02:33|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 20:02:33|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:02:35|INFO|Attempt 2 failed, retrying in 5s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 20:02:35|INFO|Attempt 2 failed, retrying in 5s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:02:35|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:02:39|INFO|Attempt 3 failed, retrying in 8s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:02:40|INFO|Attempt 3 failed, retrying in 6s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 20:02:40|INFO|Attempt 3 failed, retrying in 9s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:02:46|ERROR|Function failed after 4 attempts|HTTP check for https://another.example.com|0|0|ERROR
+2025-07-28 20:02:46|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___another_example_com|0|0|INFO
+2025-07-28 20:02:46|ERROR|Website check failed: Another Site - HTTP status indicates unavailable: HTTP |https://another.example.com|0|67|DOWN
+2025-07-28 20:02:47|INFO|DOWNTIME - Website became unavailable|https://another.example.com|0|0|DOWNTIME
+2025-07-28 20:02:47|ERROR|Function failed after 4 attempts|HTTP check for https://test.example.com|0|0|ERROR
+2025-07-28 20:02:48|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___test_example_com|0|0|INFO
+2025-07-28 20:02:48|ERROR|Website check failed: Test Site - HTTP status indicates unavailable: HTTP |https://test.example.com|0|72|DOWN
+2025-07-28 20:02:48|INFO|DOWNTIME - Website became unavailable|https://test.example.com|0|0|DOWNTIME
+2025-07-28 20:02:49|ERROR|Function failed after 4 attempts|HTTP check for https://third.example.com|0|0|ERROR
+2025-07-28 20:02:49|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_https___third_example_com|0|0|INFO
+2025-07-28 20:02:50|ERROR|Website check failed: Third Site - HTTP status indicates unavailable: HTTP |https://third.example.com|0|71|DOWN
+2025-07-28 20:02:50|INFO|DOWNTIME - Website became unavailable|https://third.example.com|0|0|DOWNTIME
+2025-07-28 20:20:51|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|233|ERROR
+2025-07-28 20:20:51|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:21:04|WARN|SLOW_RESPONSE: 2158ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2158|SLOW
+2025-07-28 20:21:05|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|263|ERROR
+2025-07-28 20:21:05|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:21:06|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8083/notfound|404|213|ERROR
+2025-07-28 20:21:06|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___localhost_8083_notfound|0|0|INFO
+2025-07-28 20:21:07|ERROR|Forbidden - Access denied - HTTP status indicates unavailable: Forbidden (HTTP status check failed)|http://localhost:8083/forbidden|403|206|ERROR
+2025-07-28 20:21:08|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___localhost_8083_forbidden|0|0|INFO
+2025-07-28 20:21:09|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:21:11|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:21:14|INFO|Attempt 3 failed, retrying in 7s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:21:21|ERROR|Function failed after 4 attempts|HTTP check for http://invalid-host-12345.com|0|0|ERROR
+2025-07-28 20:21:21|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___invalid_host_12345_com|0|0|INFO
+2025-07-28 20:21:25|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:21:25|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:21:25|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 20:21:27|INFO|Attempt 2 failed, retrying in 3s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:21:27|INFO|Attempt 2 failed, retrying in 5s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:21:27|INFO|Attempt 2 failed, retrying in 5s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 20:21:30|INFO|Attempt 3 failed, retrying in 8s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:21:32|INFO|Attempt 3 failed, retrying in 6s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:21:32|INFO|Attempt 3 failed, retrying in 9s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 20:21:38|ERROR|Function failed after 4 attempts|HTTP check for https://test.example.com|0|0|ERROR
+2025-07-28 20:21:38|ERROR|Function failed after 4 attempts|HTTP check for https://third.example.com|0|0|ERROR
+2025-07-28 20:21:38|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_https___test_example_com|0|0|INFO
+2025-07-28 20:21:38|ERROR|Website check failed: Test Site - HTTP status indicates unavailable: HTTP |https://test.example.com|0|70|DOWN
+2025-07-28 20:21:38|INFO|DOWNTIME - Website became unavailable|https://test.example.com|0|0|DOWNTIME
+2025-07-28 20:21:39|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_https___third_example_com|0|0|INFO
+2025-07-28 20:21:39|ERROR|Website check failed: Third Site - HTTP status indicates unavailable: HTTP |https://third.example.com|0|72|DOWN
+2025-07-28 20:21:39|INFO|DOWNTIME - Website became unavailable|https://third.example.com|0|0|DOWNTIME
+2025-07-28 20:21:41|ERROR|Function failed after 4 attempts|HTTP check for https://another.example.com|0|0|ERROR
+2025-07-28 20:21:42|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_https___another_example_com|0|0|INFO
+2025-07-28 20:21:42|ERROR|Website check failed: Another Site - HTTP status indicates unavailable: HTTP |https://another.example.com|0|64|DOWN
+2025-07-28 20:21:42|INFO|DOWNTIME - Website became unavailable|https://another.example.com|0|0|DOWNTIME
+2025-07-28 20:26:58|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|212|ERROR
+2025-07-28 20:26:59|ERROR|Circuit breaker opened after 5 failures|WEBSITE_CHECK_http___localhost_8083_error|0|0|ERROR
+2025-07-28 20:27:01|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8083/|0|0|CONTENT_INITIAL
+2025-07-28 20:27:03|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8083/content1|0|0|CONTENT_INITIAL
+2025-07-28 20:27:15|WARN|SLOW_RESPONSE: 2124ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2124|SLOW
+2025-07-28 20:27:18|WARN|SLOW_RESPONSE: 2112ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2112|SLOW
+2025-07-28 20:27:21|WARN|SLOW_RESPONSE: 2116ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2116|SLOW
+2025-07-28 20:30:33|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:30:33|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_http://localhost:8083/error|0|0|INFO
+2025-07-28 20:30:51|WARN|SLOW_RESPONSE: 2112ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2112|SLOW
+2025-07-28 20:30:54|WARN|SLOW_RESPONSE: 2110ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2110|SLOW
+2025-07-28 20:30:57|WARN|SLOW_RESPONSE: 2124ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2124|SLOW
+2025-07-28 20:30:58|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:30:58|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_http://localhost:8083/error|0|0|INFO
+2025-07-28 20:30:59|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8083/notfound|404|209|ERROR
+2025-07-28 20:31:00|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_http___localhost_8083_notfound|0|0|INFO
+2025-07-28 20:31:01|ERROR|Forbidden - Access denied - HTTP status indicates unavailable: Forbidden (HTTP status check failed)|http://localhost:8083/forbidden|403|224|ERROR
+2025-07-28 20:31:01|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_http___localhost_8083_forbidden|0|0|INFO
+2025-07-28 20:31:02|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:31:04|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:31:07|INFO|Attempt 3 failed, retrying in 6s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:33:10|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:33:11|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|295|ERROR
+2025-07-28 20:33:11|ERROR|Circuit breaker opened after 6 failures|WEBSITE_CHECK_http___localhost_8083_error|0|0|ERROR
+2025-07-28 20:33:29|WARN|SLOW_RESPONSE: 2108ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2108|SLOW
+2025-07-28 20:33:32|WARN|SLOW_RESPONSE: 2135ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2135|SLOW
+2025-07-28 20:33:35|WARN|SLOW_RESPONSE: 2107ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2107|SLOW
+2025-07-28 20:33:36|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 20:33:36|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_http://localhost:8083/error|0|0|INFO
+2025-07-28 20:33:37|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8083/notfound|404|216|ERROR
+2025-07-28 20:33:37|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_http___localhost_8083_notfound|0|0|INFO
+2025-07-28 20:33:38|ERROR|Forbidden - Access denied - HTTP status indicates unavailable: Forbidden (HTTP status check failed)|http://localhost:8083/forbidden|403|234|ERROR
+2025-07-28 20:33:38|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_http___localhost_8083_forbidden|0|0|INFO
+2025-07-28 20:33:39|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:33:41|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:33:45|INFO|Attempt 3 failed, retrying in 8s|HTTP check for http://invalid-host-12345.com|0|0|INFO
+2025-07-28 20:33:53|ERROR|Function failed after 4 attempts|HTTP check for http://invalid-host-12345.com|0|0|ERROR
+2025-07-28 20:33:53|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_http___invalid_host_12345_com|0|0|INFO
+2025-07-28 20:43:10|WARN|SLOW_RESPONSE: 2114ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2114|SLOW
+2025-07-28 20:43:37|INFO|CRITICAL_RESPONSE: 20979ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|20979|CRITICAL
+2025-07-28 20:43:42|WARN|SLOW_RESPONSE: 2165ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2165|SLOW
+2025-07-28 20:43:52|INFO|CRITICAL_RESPONSE: 8310ms > 5000ms for https://httpbin.org/status/301 - Response time critically high|https://httpbin.org/status/301|0|8310|CRITICAL
+2025-07-28 20:43:55|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|https://httpbin.org/status/404|404|2195|ERROR
+2025-07-28 20:43:55|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|INFO
+2025-07-28 20:43:58|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|https://httpbin.org/status/500|500|2406|ERROR
+2025-07-28 20:43:58|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 20:44:10|INFO|CRITICAL_RESPONSE: 10582ms > 5000ms for https://httpbin.org/delay/5 - Response time critically high|https://httpbin.org/delay/5|0|10582|CRITICAL
+2025-07-28 20:44:20|INFO|CRITICAL_RESPONSE: 9894ms > 5000ms for https://httpbin.org/delay/1 - Response time critically high|https://httpbin.org/delay/1|0|9894|CRITICAL
+2025-07-28 20:44:23|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|https://httpbin.org/status/500|500|1870|ERROR
+2025-07-28 20:44:23|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 20:44:26|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8888/test1.html|0|0|CONTENT_INITIAL
+2025-07-28 20:44:28|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 2s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 20:44:29|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 20:44:31|INFO|Attempt 2 failed, retrying in 3s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 20:44:34|INFO|Attempt 3 failed, retrying in 10s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 20:44:44|ERROR|Function failed after 4 attempts|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|ERROR
+2025-07-28 20:44:45|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|INFO
+2025-07-28 20:44:45|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 20:44:48|INFO|Attempt 2 failed, retrying in 4s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 20:44:52|INFO|Attempt 3 failed, retrying in 8s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 20:45:00|ERROR|Function failed after 4 attempts|HTTP check for http://localhost:99999|0|0|ERROR
+2025-07-28 20:45:00|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 20:45:03|WARN|SLOW_RESPONSE: 2295ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2295|SLOW
+2025-07-28 20:45:07|WARN|SLOW_RESPONSE: 2676ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2676|SLOW
+2025-07-28 20:45:11|WARN|SLOW_RESPONSE: 2675ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2675|SLOW
+2025-07-28 20:45:13|WARN|SLOW_RESPONSE: 4850ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4850|SLOW
+2025-07-28 20:45:16|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/initial.html|0|0|CONTENT_INITIAL
+2025-07-28 20:45:18|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/change.html|0|0|CONTENT_INITIAL
+2025-07-28 20:45:19|INFO|CONTENT_CHANGED - Content changed (previous: 141d6eee..., current: 72d07799...), last change: 1s ago|http://localhost:8081/change.html|0|0|CONTENT_CHANGED
+2025-07-28 20:45:20|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/nochange.html|0|0|CONTENT_INITIAL
+2025-07-28 20:45:23|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8081/nonexistent.html|404|51|ERROR
+2025-07-28 20:45:23|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8081_nonexistent_html|0|0|INFO
+2025-07-28 20:45:24|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/timediff.html|0|0|CONTENT_INITIAL
+2025-07-28 20:45:28|INFO|CONTENT_CHANGED - Content changed (previous: d7519c32..., current: 6eb092e9...), last change: 4s ago|http://localhost:8081/timediff.html|0|0|CONTENT_CHANGED
+2025-07-28 20:45:29|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/multiple.html|0|0|CONTENT_INITIAL
+2025-07-28 20:45:31|INFO|CONTENT_CHANGED - Content changed (previous: 9ea12234..., current: b5e7846c...), last change: 1s ago|http://localhost:8081/multiple.html|0|0|CONTENT_CHANGED
+2025-07-28 20:45:32|INFO|CONTENT_CHANGED - Content changed (previous: b5e7846c..., current: 2e8f216c...), last change: 1s ago|http://localhost:8081/multiple.html|0|0|CONTENT_CHANGED
+2025-07-28 20:45:33|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/consistency.html|0|0|CONTENT_INITIAL
+[2025-07-28 20:45:49] [INFO] Starting main daemon loop with simplified concurrent monitoring
+[2025-07-28 20:45:49] [INFO] Reading websites configuration from: /mnt/e/pro_oriented/learn/tmp_space/config/websites.conf
+[2025-07-28 20:45:50] [INFO] Loaded 3 website(s) from configuration
+[2025-07-28 20:45:50] [INFO] Loaded 3 website(s) for monitoring
+[2025-07-28 20:45:50] [INFO] Reading websites configuration from: /mnt/e/pro_oriented/learn/tmp_space/config/websites.conf
+[2025-07-28 20:45:50] [INFO] Reading websites configuration from: /mnt/e/pro_oriented/learn/tmp_space/config/websites.conf
+[2025-07-28 20:45:50] [INFO] Loaded 3 website(s) from configuration
+[2025-07-28 20:45:50] [INFO] Loaded 3 website(s) from configuration
+2025-07-28 20:45:52|INFO|Health monitoring started with 60s interval|website-monitor|0|0|INFO
+2025-07-28 20:45:52|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:45:52|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:45:54|INFO|Attempt 2 failed, retrying in 5s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:45:54|INFO|Attempt 2 failed, retrying in 5s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:45:59|INFO|Attempt 3 failed, retrying in 8s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 20:45:59|INFO|Attempt 3 failed, retrying in 7s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 20:46:07|ERROR|Function failed after 4 attempts|HTTP check for https://third.example.com|0|0|ERROR
+2025-07-28 20:46:07|ERROR|Circuit breaker opened after 5 failures|WEBSITE_CHECK_https___third_example_com|0|0|ERROR
+2025-07-28 20:46:07|ERROR|Website check failed: Third Site - HTTP status indicates unavailable: HTTP |https://third.example.com|0|66|DOWN
+2025-07-28 20:46:07|INFO|DOWNTIME - Website became unavailable|https://third.example.com|0|0|DOWNTIME
+2025-07-28 20:46:07|ERROR|Function failed after 4 attempts|HTTP check for https://test.example.com|0|0|ERROR
+2025-07-28 20:46:08|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_https___test_example_com|0|0|INFO
+2025-07-28 20:46:08|ERROR|Website check failed: Test Site - HTTP status indicates unavailable: HTTP |https://test.example.com|0|70|DOWN
+2025-07-28 20:46:08|INFO|DOWNTIME - Website became unavailable|https://test.example.com|0|0|DOWNTIME
+2025-07-28 21:38:22|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 21:38:22|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8083/error|500|220|ERROR
+2025-07-28 21:38:22|ERROR|Circuit breaker opened after 7 failures|WEBSITE_CHECK_http___localhost_8083_error|0|0|ERROR
+2025-07-28 21:38:24|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8083/|0|0|CONTENT_INITIAL
+2025-07-28 21:38:26|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8083/content1|0|0|CONTENT_INITIAL
+2025-07-28 21:38:44|WARN|SLOW_RESPONSE: 2122ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2122|SLOW
+2025-07-28 21:38:48|WARN|SLOW_RESPONSE: 2145ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2145|SLOW
+2025-07-28 21:38:51|WARN|SLOW_RESPONSE: 2107ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2107|SLOW
+2025-07-28 21:39:01|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_http___localhost_8083_error|0|0|INFO
+2025-07-28 21:39:01|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_http://localhost:8083/error|0|0|INFO
+2025-07-28 21:39:24|WARN|SLOW_RESPONSE: 2138ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2138|SLOW
+2025-07-28 21:39:27|WARN|SLOW_RESPONSE: 2168ms > 2000ms for http://localhost:8083/slow - Response time above threshold|http://localhost:8083/slow|0|2168|SLOW
+2025-07-28 21:39:35|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|http://localhost:8081/error|500|221|ERROR
+2025-07-28 21:39:35|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8081_error|0|0|INFO
+2025-07-28 21:39:42|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_https___third_example_com|0|0|INFO
+2025-07-28 21:39:42|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 21:39:43|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 21:39:43|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 21:39:45|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 21:39:45|INFO|Attempt 2 failed, retrying in 3s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 21:39:45|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 21:39:48|INFO|Attempt 3 failed, retrying in 6s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 21:39:49|INFO|Attempt 3 failed, retrying in 6s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 21:39:50|INFO|Attempt 3 failed, retrying in 8s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 21:39:55|ERROR|Function failed after 4 attempts|HTTP check for https://third.example.com|0|0|ERROR
+2025-07-28 21:39:55|ERROR|Circuit breaker opened after 6 failures|WEBSITE_CHECK_https___third_example_com|0|0|ERROR
+2025-07-28 21:39:55|ERROR|Website check failed: Third Site - HTTP status indicates unavailable: HTTP |https://third.example.com|0|102|DOWN
+2025-07-28 21:39:55|INFO|DOWNTIME - Website became unavailable|https://third.example.com|0|0|DOWNTIME
+2025-07-28 21:39:55|ERROR|Function failed after 4 attempts|HTTP check for https://test.example.com|0|0|ERROR
+2025-07-28 21:39:55|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_https___test_example_com|0|0|INFO
+2025-07-28 21:39:55|ERROR|Website check failed: Test Site - HTTP status indicates unavailable: HTTP |https://test.example.com|0|78|DOWN
+2025-07-28 21:39:55|INFO|DOWNTIME - Website became unavailable|https://test.example.com|0|0|DOWNTIME
+2025-07-28 21:39:58|ERROR|Function failed after 4 attempts|HTTP check for https://another.example.com|0|0|ERROR
+2025-07-28 21:39:58|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_https___another_example_com|0|0|INFO
+2025-07-28 21:39:58|ERROR|Website check failed: Another Site - HTTP status indicates unavailable: HTTP |https://another.example.com|0|71|DOWN
+2025-07-28 21:39:58|INFO|DOWNTIME - Website became unavailable|https://another.example.com|0|0|DOWNTIME
+2025-07-28 21:42:31|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___third_example_com|0|0|INFO
+2025-07-28 21:42:31|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://third.example.com|0|0|INFO
+2025-07-28 21:42:31|ERROR|Website check failed: Third Site - Circuit breaker is open for this URL|https://third.example.com|0|0|DOWN
+2025-07-28 21:42:31|INFO|DOWNTIME - Website became unavailable|https://third.example.com|0|0|DOWNTIME
+2025-07-28 21:42:31|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 21:42:32|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 21:42:33|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 21:42:34|INFO|Attempt 2 failed, retrying in 3s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 21:42:37|INFO|Attempt 3 failed, retrying in 7s|HTTP check for https://another.example.com|0|0|INFO
+2025-07-28 21:42:38|INFO|Attempt 3 failed, retrying in 7s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 21:44:41|WARN|SLOW_RESPONSE: 2454ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2454|SLOW
+2025-07-28 21:44:51|INFO|CRITICAL_RESPONSE: 6515ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|6515|CRITICAL
+2025-07-28 21:45:00|INFO|CRITICAL_RESPONSE: 8378ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|8378|CRITICAL
+2025-07-28 21:45:09|INFO|CRITICAL_RESPONSE: 7869ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|7869|CRITICAL
+2025-07-28 21:45:15|WARN|SLOW_RESPONSE: 4729ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4729|SLOW
+2025-07-28 21:45:29|INFO|CRITICAL_RESPONSE: 13128ms > 5000ms for https://httpbin.org/status/301 - Response time critically high|https://httpbin.org/status/301|0|13128|CRITICAL
+2025-07-28 21:45:33|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|https://httpbin.org/status/404|404|3173|ERROR
+2025-07-28 21:45:33|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|INFO
+2025-07-28 21:45:37|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|https://httpbin.org/status/500|500|3329|ERROR
+2025-07-28 21:45:37|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 21:45:50|INFO|CRITICAL_RESPONSE: 11986ms > 5000ms for https://httpbin.org/delay/5 - Response time critically high|https://httpbin.org/delay/5|0|11986|CRITICAL
+2025-07-28 21:46:01|INFO|CRITICAL_RESPONSE: 9962ms > 5000ms for https://httpbin.org/delay/1 - Response time critically high|https://httpbin.org/delay/1|0|9962|CRITICAL
+2025-07-28 21:46:05|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|https://httpbin.org/status/500|500|2798|ERROR
+2025-07-28 21:46:05|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 21:46:08|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8888/test1.html|0|0|CONTENT_INITIAL
+2025-07-28 21:46:09|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 1s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 21:46:10|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 21:46:12|INFO|Attempt 2 failed, retrying in 3s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 21:46:16|INFO|Attempt 3 failed, retrying in 7s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 21:46:23|ERROR|Function failed after 4 attempts|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|ERROR
+2025-07-28 21:46:23|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|INFO
+2025-07-28 21:46:24|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 21:46:26|INFO|Attempt 2 failed, retrying in 5s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 21:46:31|INFO|Attempt 3 failed, retrying in 10s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 21:46:41|ERROR|Function failed after 4 attempts|HTTP check for http://localhost:99999|0|0|ERROR
+2025-07-28 21:46:41|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 21:46:54|INFO|CRITICAL_RESPONSE: 12069ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|12069|CRITICAL
+2025-07-28 21:47:01|WARN|SLOW_RESPONSE: 3340ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3340|SLOW
+2025-07-28 21:47:09|INFO|CRITICAL_RESPONSE: 11008ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|11008|CRITICAL
+2025-07-28 21:47:10|INFO|CRITICAL_RESPONSE: 12025ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|12025|CRITICAL
+2025-07-28 21:47:14|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/initial.html|0|0|CONTENT_INITIAL
+2025-07-28 21:47:15|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/change.html|0|0|CONTENT_INITIAL
+2025-07-28 21:47:17|INFO|CONTENT_CHANGED - Content changed (previous: 141d6eee..., current: 72d07799...), last change: 2s ago|http://localhost:8081/change.html|0|0|CONTENT_CHANGED
+2025-07-28 21:47:18|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/nochange.html|0|0|CONTENT_INITIAL
+2025-07-28 21:47:21|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8081/nonexistent.html|404|52|ERROR
+2025-07-28 21:47:21|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___localhost_8081_nonexistent_html|0|0|INFO
+2025-07-28 21:47:22|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/timediff.html|0|0|CONTENT_INITIAL
+2025-07-28 21:47:25|INFO|CONTENT_CHANGED - Content changed (previous: d7519c32..., current: 6eb092e9...), last change: 3s ago|http://localhost:8081/timediff.html|0|0|CONTENT_CHANGED
+2025-07-28 21:47:27|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/multiple.html|0|0|CONTENT_INITIAL
+2025-07-28 21:47:28|INFO|CONTENT_CHANGED - Content changed (previous: 9ea12234..., current: b5e7846c...), last change: 1s ago|http://localhost:8081/multiple.html|0|0|CONTENT_CHANGED
+2025-07-28 21:47:29|INFO|CONTENT_CHANGED - Content changed (previous: b5e7846c..., current: 2e8f216c...), last change: 1s ago|http://localhost:8081/multiple.html|0|0|CONTENT_CHANGED
+2025-07-28 21:47:31|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8081/consistency.html|0|0|CONTENT_INITIAL
+[2025-07-28 21:47:46] [INFO] Starting main daemon loop with simplified concurrent monitoring
+[2025-07-28 21:47:46] [INFO] Reading websites configuration from: /mnt/e/pro_oriented/learn/tmp_space/config/websites.conf
+[2025-07-28 21:47:47] [INFO] Loaded 3 website(s) from configuration
+[2025-07-28 21:47:47] [INFO] Loaded 3 website(s) for monitoring
+[2025-07-28 21:47:47] [INFO] Reading websites configuration from: /mnt/e/pro_oriented/learn/tmp_space/config/websites.conf
+[2025-07-28 21:47:47] [INFO] Reading websites configuration from: /mnt/e/pro_oriented/learn/tmp_space/config/websites.conf
+[2025-07-28 21:47:48] [INFO] Loaded 3 website(s) from configuration
+[2025-07-28 21:47:48] [INFO] Loaded 3 website(s) from configuration
+2025-07-28 21:47:49|INFO|Health monitoring started with 60s interval|website-monitor|0|0|INFO
+2025-07-28 21:47:49|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_https___third_example_com|0|0|INFO
+2025-07-28 21:47:49|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 21:47:49|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 21:47:51|INFO|Attempt 2 failed, retrying in 3s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 21:47:51|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 21:47:54|INFO|Attempt 3 failed, retrying in 8s|HTTP check for https://test.example.com|0|0|INFO
+2025-07-28 21:47:55|INFO|Attempt 3 failed, retrying in 9s|HTTP check for https://third.example.com|0|0|INFO
+2025-07-28 21:48:02|ERROR|Function failed after 4 attempts|HTTP check for https://test.example.com|0|0|ERROR
+2025-07-28 21:48:03|ERROR|Circuit breaker opened after 5 failures|WEBSITE_CHECK_https___test_example_com|0|0|ERROR
+2025-07-28 21:48:03|ERROR|Website check failed: Test Site - HTTP status indicates unavailable: HTTP |https://test.example.com|0|66|DOWN
+2025-07-28 21:48:03|INFO|DOWNTIME - Website became unavailable|https://test.example.com|0|0|DOWNTIME
+2025-07-28 21:48:05|ERROR|Function failed after 4 attempts|HTTP check for https://third.example.com|0|0|ERROR
+2025-07-28 21:48:05|ERROR|Circuit breaker opened after 7 failures|WEBSITE_CHECK_https___third_example_com|0|0|ERROR
+2025-07-28 21:48:05|ERROR|Website check failed: Third Site - HTTP status indicates unavailable: HTTP |https://third.example.com|0|105|DOWN
+2025-07-28 21:48:05|INFO|DOWNTIME - Website became unavailable|https://third.example.com|0|0|DOWNTIME
+2025-07-28 21:48:48|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|1197|ERROR
+2025-07-28 21:48:48|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:48:55|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|2958|ERROR
+2025-07-28 21:48:55|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:48:57|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|1140|ERROR
+2025-07-28 21:48:57|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:48:59|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|1151|ERROR
+2025-07-28 21:48:59|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:49:01|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|1200|ERROR
+2025-07-28 21:49:01|ERROR|Circuit breaker opened after 5 failures|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|ERROR
+2025-07-28 21:49:04|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/301|503|2240|ERROR
+2025-07-28 21:49:05|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_301|0|0|INFO
+2025-07-28 21:49:07|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/404|503|1774|ERROR
+2025-07-28 21:49:07|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|INFO
+2025-07-28 21:49:09|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/500|503|1183|ERROR
+2025-07-28 21:49:09|ERROR|Circuit breaker opened after 5 failures|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|ERROR
+2025-07-28 21:49:14|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/delay/5|503|3211|ERROR
+2025-07-28 21:49:14|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_delay_5|0|0|INFO
+2025-07-28 21:49:17|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/delay/1|503|2590|ERROR
+2025-07-28 21:49:17|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_delay_1|0|0|INFO
+2025-07-28 21:49:18|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 21:49:18|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/500|0|0|INFO
+2025-07-28 21:49:21|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8888/test1.html|0|0|CONTENT_INITIAL
+2025-07-28 21:49:22|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 1s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 21:49:23|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 21:49:26|INFO|Attempt 2 failed, retrying in 3s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 21:49:29|INFO|Attempt 3 failed, retrying in 8s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 21:49:37|ERROR|Function failed after 4 attempts|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|ERROR
+2025-07-28 21:49:37|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|INFO
+2025-07-28 21:49:39|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 21:49:41|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 21:49:44|INFO|Attempt 3 failed, retrying in 10s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 21:49:54|ERROR|Function failed after 4 attempts|HTTP check for http://localhost:99999|0|0|ERROR
+2025-07-28 21:49:54|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 21:49:55|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:49:55|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/200|0|0|INFO
+2025-07-28 21:49:56|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:49:56|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/200|0|0|INFO
+2025-07-28 21:49:57|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:49:57|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:49:57|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:49:57|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/200|0|0|INFO
+2025-07-28 21:49:57|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/200|0|0|INFO
+2025-07-28 21:49:57|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/200|0|0|INFO
+2025-07-28 21:54:46|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8087|0|0|INFO
+2025-07-28 21:55:11|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8087|0|0|INFO
+2025-07-28 21:55:12|INFO|CONTENT_INITIAL - First time monitoring this URL|http://localhost:8087|0|0|CONTENT_INITIAL
+2025-07-28 21:55:36|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8087|0|0|INFO
+2025-07-28 21:56:36|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 21:56:39|WARN|SLOW_RESPONSE: 2802ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2802|SLOW
+2025-07-28 21:56:39|INFO|Circuit breaker closed after successful execution|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|RECOVERY
+2025-07-28 21:56:46|WARN|SLOW_RESPONSE: 2627ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2627|SLOW
+2025-07-28 21:56:51|WARN|SLOW_RESPONSE: 3479ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3479|SLOW
+2025-07-28 21:56:56|WARN|SLOW_RESPONSE: 4059ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4059|SLOW
+2025-07-28 21:57:01|WARN|SLOW_RESPONSE: 4154ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4154|SLOW
+2025-07-28 21:57:15|INFO|CRITICAL_RESPONSE: 12398ms > 5000ms for https://httpbin.org/status/301 - Response time critically high|https://httpbin.org/status/301|0|12398|CRITICAL
+2025-07-28 21:57:19|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|https://httpbin.org/status/404|404|3264|ERROR
+2025-07-28 21:57:19|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|INFO
+2025-07-28 21:57:20|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 21:57:23|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|https://httpbin.org/status/500|500|2624|ERROR
+2025-07-28 21:57:23|ERROR|Circuit breaker opened after 6 failures|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|ERROR
+2025-07-28 21:58:07|WARN|SLOW_RESPONSE: 2851ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2851|SLOW
+2025-07-28 21:58:15|WARN|SLOW_RESPONSE: 3794ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3794|SLOW
+2025-07-28 21:58:20|WARN|SLOW_RESPONSE: 3802ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3802|SLOW
+2025-07-28 21:58:26|INFO|CRITICAL_RESPONSE: 5154ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|5154|CRITICAL
+2025-07-28 21:58:29|WARN|SLOW_RESPONSE: 2008ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2008|SLOW
+2025-07-28 21:58:37|INFO|CRITICAL_RESPONSE: 7117ms > 5000ms for https://httpbin.org/status/301 - Response time critically high|https://httpbin.org/status/301|0|7117|CRITICAL
+2025-07-28 21:58:44|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|https://httpbin.org/status/404|404|5405|ERROR
+2025-07-28 21:58:44|ERROR|Circuit breaker opened after 5 failures|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|ERROR
+2025-07-28 21:58:45|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 21:58:45|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/500|0|0|INFO
+2025-07-28 21:58:57|INFO|CRITICAL_RESPONSE: 11383ms > 5000ms for https://httpbin.org/delay/5 - Response time critically high|https://httpbin.org/delay/5|0|11383|CRITICAL
+2025-07-28 21:59:04|WARN|SLOW_RESPONSE: 4911ms > 2000ms for https://httpbin.org/delay/1 - Response time above threshold|https://httpbin.org/delay/1|0|4911|SLOW
+2025-07-28 21:59:05|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 21:59:05|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/500|0|0|INFO
+2025-07-28 21:59:08|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 21:59:09|INFO|CONTENT_CHANGED - Content changed (previous: 3d6c1e1d..., current: 538885a6...), last change: 9m ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 21:59:10|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 21:59:11|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 2s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 21:59:13|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 21:59:15|INFO|Attempt 2 failed, retrying in 3s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 21:59:18|INFO|Attempt 3 failed, retrying in 8s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 21:59:27|ERROR|Function failed after 4 attempts|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|ERROR
+2025-07-28 21:59:27|INFO|Circuit breaker recorded failure (4/5)|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|INFO
+2025-07-28 21:59:28|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 21:59:29|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 21:59:31|INFO|Attempt 2 failed, retrying in 4s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 21:59:35|INFO|Attempt 3 failed, retrying in 10s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 21:59:45|ERROR|Function failed after 4 attempts|HTTP check for http://localhost:99999|0|0|ERROR
+2025-07-28 21:59:45|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:00:10|INFO|CRITICAL_RESPONSE: 23367ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|23367|CRITICAL
+2025-07-28 22:00:33|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://httpbin.org/status/200|0|0|INFO
+2025-07-28 22:01:24|INFO|Function succeeded after 2 attempts|HTTP check for https://httpbin.org/status/200|0|0|RECOVERY
+2025-07-28 22:01:24|INFO|CRITICAL_RESPONSE: 48610ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|48610|CRITICAL
+2025-07-28 22:01:46|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://httpbin.org/status/200|0|0|INFO
+2025-07-28 22:01:46|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://httpbin.org/status/200|0|0|INFO
+2025-07-28 22:01:46|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://httpbin.org/status/200|0|0|INFO
+2025-07-28 22:01:50|INFO|Function succeeded after 2 attempts|HTTP check for https://httpbin.org/status/200|0|0|RECOVERY
+2025-07-28 22:01:50|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|2199|ERROR
+2025-07-28 22:01:51|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 22:01:51|INFO|Function succeeded after 2 attempts|HTTP check for https://httpbin.org/status/200|0|0|RECOVERY
+2025-07-28 22:01:51|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|2548|ERROR
+2025-07-28 22:01:51|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 22:01:56|INFO|Function succeeded after 2 attempts|HTTP check for https://httpbin.org/status/200|0|0|RECOVERY
+2025-07-28 22:01:57|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|8226|ERROR
+2025-07-28 22:01:57|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 22:03:27|WARN|SLOW_RESPONSE: 3311ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3311|SLOW
+2025-07-28 22:03:35|INFO|CRITICAL_RESPONSE: 6548ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|6548|CRITICAL
+2025-07-28 22:03:38|WARN|SLOW_RESPONSE: 2892ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2892|SLOW
+2025-07-28 22:03:44|WARN|SLOW_RESPONSE: 4477ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4477|SLOW
+2025-07-28 22:03:57|INFO|CRITICAL_RESPONSE: 11614ms > 5000ms for https://httpbin.org/status/301 - Response time critically high|https://httpbin.org/status/301|0|11614|CRITICAL
+2025-07-28 22:03:57|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|INFO
+2025-07-28 22:03:59|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|https://httpbin.org/status/404|404|1479|ERROR
+2025-07-28 22:03:59|ERROR|Circuit breaker opened after 6 failures|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|ERROR
+2025-07-28 22:04:00|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 22:04:05|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|https://httpbin.org/status/500|500|4151|ERROR
+2025-07-28 22:04:05|ERROR|Circuit breaker opened after 7 failures|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|ERROR
+2025-07-28 22:04:16|INFO|CRITICAL_RESPONSE: 10018ms > 5000ms for https://httpbin.org/delay/5 - Response time critically high|https://httpbin.org/delay/5|0|10018|CRITICAL
+2025-07-28 22:04:23|INFO|CRITICAL_RESPONSE: 5966ms > 5000ms for https://httpbin.org/delay/1 - Response time critically high|https://httpbin.org/delay/1|0|5966|CRITICAL
+2025-07-28 22:04:24|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 22:04:24|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/500|0|0|INFO
+2025-07-28 22:04:28|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:04:28|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:8888/test1.html|0|0|INFO
+2025-07-28 22:04:30|INFO|Function succeeded after 2 attempts|HTTP check for http://localhost:8888/test1.html|0|0|RECOVERY
+2025-07-28 22:04:31|INFO|CONTENT_CHANGED - Content changed (previous: 3d6c1e1d..., current: 538885a6...), last change: 5m ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:04:32|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:04:33|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 2s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:04:34|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:04:37|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:04:41|INFO|Attempt 3 failed, retrying in 10s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:12:35|INFO|CRITICAL_RESPONSE: 8390ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|8390|CRITICAL
+2025-07-28 22:12:42|WARN|SLOW_RESPONSE: 3581ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3581|SLOW
+2025-07-28 22:12:47|WARN|SLOW_RESPONSE: 3407ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3407|SLOW
+2025-07-28 22:12:50|WARN|SLOW_RESPONSE: 2053ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2053|SLOW
+2025-07-28 22:13:02|INFO|CRITICAL_RESPONSE: 7153ms > 5000ms for https://httpbin.org/status/301 - Response time critically high|https://httpbin.org/status/301|0|7153|CRITICAL
+2025-07-28 22:13:02|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|INFO
+2025-07-28 22:13:20|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|https://httpbin.org/status/404|404|17937|ERROR
+2025-07-28 22:13:21|ERROR|Circuit breaker opened after 7 failures|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|ERROR
+2025-07-28 22:13:21|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 22:13:26|ERROR|Internal Server Error - Server encountered an error - HTTP status indicates unavailable: Internal Server Error (HTTP status check failed)|https://httpbin.org/status/500|500|4201|ERROR
+2025-07-28 22:13:26|ERROR|Circuit breaker opened after 8 failures|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|ERROR
+2025-07-28 22:13:38|INFO|CRITICAL_RESPONSE: 11017ms > 5000ms for https://httpbin.org/delay/5 - Response time critically high|https://httpbin.org/delay/5|0|11017|CRITICAL
+2025-07-28 22:13:53|INFO|CRITICAL_RESPONSE: 13987ms > 5000ms for https://httpbin.org/delay/1 - Response time critically high|https://httpbin.org/delay/1|0|13987|CRITICAL
+2025-07-28 22:13:54|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 22:13:54|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/500|0|0|INFO
+2025-07-28 22:13:57|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:13:58|INFO|CONTENT_CHANGED - Content changed (previous: 3d6c1e1d..., current: 538885a6...), last change: 9m ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:13:58|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:13:59|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 1s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:14:01|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:14:03|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:14:07|INFO|Attempt 3 failed, retrying in 7s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:14:14|ERROR|Function failed after 4 attempts|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|ERROR
+2025-07-28 22:14:14|ERROR|Circuit breaker opened after 5 failures|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|ERROR
+2025-07-28 22:14:15|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:14:15|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:14:17|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:14:21|INFO|Attempt 3 failed, retrying in 9s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:14:30|ERROR|Function failed after 4 attempts|HTTP check for http://localhost:99999|0|0|ERROR
+2025-07-28 22:14:30|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:14:34|WARN|SLOW_RESPONSE: 2826ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2826|SLOW
+2025-07-28 22:14:38|WARN|SLOW_RESPONSE: 2694ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2694|SLOW
+2025-07-28 22:14:41|WARN|SLOW_RESPONSE: 2219ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2219|SLOW
+2025-07-28 22:14:43|WARN|SLOW_RESPONSE: 4303ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4303|SLOW
+2025-07-28 22:14:47|INFO|CRITICAL_RESPONSE: 7852ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|7852|CRITICAL
+2025-07-28 22:14:58|WARN|SLOW_RESPONSE: 3412ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3412|SLOW
+2025-07-28 22:15:11|INFO|CRITICAL_RESPONSE: 9869ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|9869|CRITICAL
+2025-07-28 22:15:20|WARN|SLOW_RESPONSE: 4550ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4550|SLOW
+2025-07-28 22:15:23|WARN|SLOW_RESPONSE: 2644ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2644|SLOW
+2025-07-28 22:15:44|INFO|CRITICAL_RESPONSE: 19725ms > 5000ms for https://httpbin.org/status/301 - Response time critically high|https://httpbin.org/status/301|0|19725|CRITICAL
+2025-07-28 22:15:45|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|INFO
+2025-07-28 22:15:45|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/404|0|0|INFO
+2025-07-28 22:15:46|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 22:15:46|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/500|0|0|INFO
+2025-07-28 22:15:55|INFO|CRITICAL_RESPONSE: 8608ms > 5000ms for https://httpbin.org/delay/5 - Response time critically high|https://httpbin.org/delay/5|0|8608|CRITICAL
+2025-07-28 22:16:03|INFO|CRITICAL_RESPONSE: 7128ms > 5000ms for https://httpbin.org/delay/1 - Response time critically high|https://httpbin.org/delay/1|0|7128|CRITICAL
+2025-07-28 22:16:04|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 22:16:04|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/500|0|0|INFO
+2025-07-28 22:16:07|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:16:08|INFO|CONTENT_CHANGED - Content changed (previous: 3d6c1e1d..., current: 538885a6...), last change: 2m ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:16:10|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:16:11|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 3s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:16:13|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|INFO
+2025-07-28 22:16:13|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:16:13|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:16:14|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:16:16|INFO|Attempt 2 failed, retrying in 4s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:16:20|INFO|Attempt 3 failed, retrying in 7s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:16:27|ERROR|Function failed after 4 attempts|HTTP check for http://localhost:99999|0|0|ERROR
+2025-07-28 22:16:28|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:17:13|INFO|CRITICAL_RESPONSE: 6961ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|6961|CRITICAL
+2025-07-28 22:17:21|WARN|SLOW_RESPONSE: 3491ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3491|SLOW
+2025-07-28 22:17:28|INFO|CRITICAL_RESPONSE: 5963ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|5963|CRITICAL
+2025-07-28 22:17:33|WARN|SLOW_RESPONSE: 4267ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4267|SLOW
+2025-07-28 22:17:41|INFO|CRITICAL_RESPONSE: 7216ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|7216|CRITICAL
+2025-07-28 22:17:48|INFO|CRITICAL_RESPONSE: 5347ms > 5000ms for https://httpbin.org/status/301 - Response time critically high|https://httpbin.org/status/301|0|5347|CRITICAL
+2025-07-28 22:17:49|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_404|0|0|INFO
+2025-07-28 22:17:49|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/404|0|0|INFO
+2025-07-28 22:17:49|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 22:17:49|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/500|0|0|INFO
+2025-07-28 22:18:03|INFO|CRITICAL_RESPONSE: 12248ms > 5000ms for https://httpbin.org/delay/5 - Response time critically high|https://httpbin.org/delay/5|0|12248|CRITICAL
+2025-07-28 22:18:14|INFO|CRITICAL_RESPONSE: 10554ms > 5000ms for https://httpbin.org/delay/1 - Response time critically high|https://httpbin.org/delay/1|0|10554|CRITICAL
+2025-07-28 22:18:15|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___httpbin_org_status_500|0|0|INFO
+2025-07-28 22:18:15|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://httpbin.org/status/500|0|0|INFO
+2025-07-28 22:18:18|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:18:18|INFO|CONTENT_CHANGED - Content changed (previous: 3d6c1e1d..., current: 538885a6...), last change: 2m ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:18:19|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:18:20|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 2s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:18:21|INFO|Circuit breaker is open, blocking request|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|INFO
+2025-07-28 22:18:21|INFO|Website check blocked by circuit breaker|WEBSITE_CHECK_https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:18:21|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:18:22|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:18:24|INFO|Attempt 2 failed, retrying in 5s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:18:29|INFO|Attempt 3 failed, retrying in 8s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:18:37|ERROR|Function failed after 4 attempts|HTTP check for http://localhost:99999|0|0|ERROR
+2025-07-28 22:18:37|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:18:43|WARN|SLOW_RESPONSE: 2270ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2270|SLOW
+2025-07-28 22:18:53|INFO|CRITICAL_RESPONSE: 9007ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|9007|CRITICAL
+2025-07-28 22:18:58|WARN|SLOW_RESPONSE: 3804ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3804|SLOW
+2025-07-28 22:19:01|INFO|CRITICAL_RESPONSE: 6084ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|6084|CRITICAL
+2025-07-28 22:19:04|INFO|CRITICAL_RESPONSE: 10076ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|10076|CRITICAL
+2025-07-28 22:19:17|WARN|SLOW_RESPONSE: 4737ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4737|SLOW
+2025-07-28 22:19:28|INFO|CRITICAL_RESPONSE: 7054ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|7054|CRITICAL
+2025-07-28 22:19:45|INFO|CRITICAL_RESPONSE: 16230ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|16230|CRITICAL
+2025-07-28 22:19:49|WARN|SLOW_RESPONSE: 2945ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2945|SLOW
+2025-07-28 22:19:57|INFO|CRITICAL_RESPONSE: 6747ms > 5000ms for https://httpbin.org/status/200 - Response time critically high|https://httpbin.org/status/200|0|6747|CRITICAL
+2025-07-28 22:22:16|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_basic_test_html|0|0|INFO
+2025-07-28 22:22:22|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:22:23|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:22:24|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:22:27|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_success_html|0|0|INFO
+2025-07-28 22:22:28|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_nonexistent_html|0|0|INFO
+2025-07-28 22:22:28|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8888/nonexistent.html|404|50|ERROR
+2025-07-28 22:22:29|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8888_nonexistent_html|0|0|INFO
+2025-07-28 22:22:50|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:23:14|INFO|Attempt 2 failed, retrying in 4s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:23:39|INFO|Attempt 3 failed, retrying in 9s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:24:01|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_basic_test_html|0|0|INFO
+2025-07-28 22:24:07|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:24:08|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:24:09|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:24:12|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_success_html|0|0|INFO
+2025-07-28 22:24:13|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_nonexistent_html|0|0|INFO
+2025-07-28 22:24:13|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8888/nonexistent.html|404|52|ERROR
+2025-07-28 22:24:14|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8888_nonexistent_html|0|0|INFO
+2025-07-28 22:24:36|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:24:59|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:25:23|INFO|Attempt 3 failed, retrying in 6s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:25:50|ERROR|Function failed after 4 attempts|HTTP check for http://192.0.2.1:80|0|0|ERROR
+2025-07-28 22:25:50|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___192_0_2_1_80|0|0|INFO
+2025-07-28 22:25:53|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_timeout_test_html|0|0|INFO
+2025-07-28 22:26:16|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:26:39|INFO|Attempt 2 failed, retrying in 4s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:27:04|INFO|Attempt 3 failed, retrying in 10s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:27:35|ERROR|Function failed after 4 attempts|HTTP check for http://192.0.2.1:80|0|0|ERROR
+2025-07-28 22:27:36|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___192_0_2_1_80|0|0|INFO
+2025-07-28 22:27:38|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:27:39|INFO|CONTENT_CHANGED - Content changed (previous: 3d6c1e1d..., current: 538885a6...), last change: 9m ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:27:40|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:27:40|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 1s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:27:41|INFO|Circuit breaker transitioning to half-open state|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|INFO
+2025-07-28 22:27:42|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:27:44|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:27:48|INFO|Attempt 3 failed, retrying in 10s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:27:58|ERROR|Function failed after 4 attempts|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|ERROR
+2025-07-28 22:27:58|ERROR|Circuit breaker opened after 6 failures|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|ERROR
+2025-07-28 22:27:59|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:27:59|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:28:02|INFO|Attempt 2 failed, retrying in 5s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:28:07|INFO|Attempt 3 failed, retrying in 9s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:28:16|ERROR|Function failed after 4 attempts|HTTP check for http://localhost:99999|0|0|ERROR
+2025-07-28 22:28:16|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:28:19|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_verbose_test_html|0|0|INFO
+2025-07-28 22:28:20|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_verbose_test_html|0|0|INFO
+2025-07-28 22:28:23|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_response_time_test_html|0|0|INFO
+2025-07-28 22:28:26|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_concurrent_test_html|0|0|INFO
+2025-07-28 22:29:21|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:29:44|INFO|Attempt 2 failed, retrying in 5s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:30:10|ERROR|Function failed after 3 attempts|HTTP check for http://192.0.2.1:80|0|0|ERROR
+2025-07-28 22:30:10|INFO|Circuit breaker recorded failure (3/5)|WEBSITE_CHECK_http___192_0_2_1_80|0|0|INFO
+2025-07-28 22:30:14|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8889_|0|0|INFO
+2025-07-28 22:30:15|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8889_|0|0|INFO
+2025-07-28 22:30:21|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8889_|0|0|INFO
+2025-07-28 22:37:02|WARN|SLOW_RESPONSE: 4679ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4679|SLOW
+2025-07-28 22:38:39|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:39:02|INFO|Attempt 2 failed, retrying in 4s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:39:52|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:40:16|INFO|Attempt 2 failed, retrying in 5s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:40:55|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|1200|ERROR
+2025-07-28 22:40:55|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 22:40:56|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|2683|ERROR
+2025-07-28 22:40:57|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 22:40:57|ERROR|Service Unavailable - Server temporarily unavailable - HTTP status indicates unavailable: Service Unavailable (HTTP status check failed)|https://httpbin.org/status/200|503|3251|ERROR
+2025-07-28 22:40:57|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___httpbin_org_status_200|0|0|INFO
+2025-07-28 22:42:15|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_basic_test_html|0|0|INFO
+2025-07-28 22:42:21|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:42:22|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:42:23|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:42:27|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_success_html|0|0|INFO
+2025-07-28 22:42:28|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_nonexistent_html|0|0|INFO
+2025-07-28 22:42:28|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8888/nonexistent.html|404|50|ERROR
+2025-07-28 22:42:28|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8888_nonexistent_html|0|0|INFO
+2025-07-28 22:42:50|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:42:54|WARN|SLOW_RESPONSE: 2391ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|2391|SLOW
+2025-07-28 22:42:55|WARN|SLOW_RESPONSE: 3545ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|3545|SLOW
+2025-07-28 22:42:56|WARN|SLOW_RESPONSE: 4470ms > 2000ms for https://httpbin.org/status/200 - Response time above threshold|https://httpbin.org/status/200|0|4470|SLOW
+2025-07-28 22:45:58|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_basic_test_html|0|0|INFO
+2025-07-28 22:46:04|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:46:05|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:46:06|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_format_test_html|0|0|INFO
+2025-07-28 22:46:10|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_success_html|0|0|INFO
+2025-07-28 22:46:11|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_nonexistent_html|0|0|INFO
+2025-07-28 22:46:11|ERROR|Not Found - Resource does not exist - HTTP status indicates unavailable: Not Found (HTTP status check failed)|http://localhost:8888/nonexistent.html|404|51|ERROR
+2025-07-28 22:46:11|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_8888_nonexistent_html|0|0|INFO
+2025-07-28 22:46:33|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:46:56|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:47:21|INFO|Attempt 3 failed, retrying in 7s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:47:49|ERROR|Function failed after 4 attempts|HTTP check for http://192.0.2.1:80|0|0|ERROR
+2025-07-28 22:47:49|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___192_0_2_1_80|0|0|INFO
+2025-07-28 22:47:52|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_timeout_test_html|0|0|INFO
+2025-07-28 22:48:15|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:48:38|INFO|Attempt 2 failed, retrying in 5s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:49:04|INFO|Attempt 3 failed, retrying in 10s|HTTP check for http://192.0.2.1:80|0|0|INFO
+2025-07-28 22:49:36|ERROR|Function failed after 4 attempts|HTTP check for http://192.0.2.1:80|0|0|ERROR
+2025-07-28 22:49:36|INFO|Circuit breaker recorded failure (2/5)|WEBSITE_CHECK_http___192_0_2_1_80|0|0|INFO
+2025-07-28 22:49:38|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:49:39|INFO|CONTENT_CHANGED - Content changed (previous: 3d6c1e1d..., current: 538885a6...), last change: 21m ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:49:40|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_test1_html|0|0|INFO
+2025-07-28 22:49:41|INFO|CONTENT_CHANGED - Content changed (previous: 538885a6..., current: 3d6c1e1d...), last change: 2s ago|http://localhost:8888/test1.html|0|0|CONTENT_CHANGED
+2025-07-28 22:49:42|INFO|Attempt 1 failed, retrying in 2s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:49:44|INFO|Attempt 2 failed, retrying in 4s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:49:48|INFO|Attempt 3 failed, retrying in 8s|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|INFO
+2025-07-28 22:49:56|ERROR|Function failed after 4 attempts|HTTP check for https://this-domain-should-not-exist-12345.com|0|0|ERROR
+2025-07-28 22:49:57|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|0|0|INFO
+2025-07-28 22:49:58|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:49:58|INFO|Attempt 1 failed, retrying in 2s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:50:00|INFO|Attempt 2 failed, retrying in 3s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:50:04|INFO|Attempt 3 failed, retrying in 9s|HTTP check for http://localhost:99999|0|0|INFO
+2025-07-28 22:50:13|ERROR|Function failed after 4 attempts|HTTP check for http://localhost:99999|0|0|ERROR
+2025-07-28 22:50:13|INFO|Circuit breaker recorded failure (1/5)|WEBSITE_CHECK_http___localhost_99999|0|0|INFO
+2025-07-28 22:50:16|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_verbose_test_html|0|0|INFO
+2025-07-28 22:50:17|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_verbose_test_html|0|0|INFO
+2025-07-28 22:50:20|INFO|Circuit breaker state reset for testing|WEBSITE_CHECK_http___localhost_8888_response_time_test_html|0|0|INFO

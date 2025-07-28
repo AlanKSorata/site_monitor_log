@@ -16,3 +16,268 @@
 2025-07-27 14:26:15|DEBUG|Cleaning up logs older than 30 days in: /mnt/e/pro_oriented/learn/tmp_space/data/logs||
 2025-07-27 14:26:15|DEBUG|Log cleanup completed: no old files found||
 2025-07-27 14:26:15|DEBUG|Log maintenance completed successfully||
+2025-07-28 19:59:03|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 19:59:03|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 19:59:03|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 19:59:03|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 19:59:03|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 19:59:03|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 19:59:03|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 19:59:03|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 19:59:03|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 19:59:04|DEBUG|Executing HTTP check for https://third.example.com (attempt 1/4)|error-recovery|
+2025-07-28 19:59:04|DEBUG|Executing HTTP check for https://test.example.com (attempt 1/4)|error-recovery|
+2025-07-28 19:59:04|DEBUG|Executing HTTP check for https://another.example.com (attempt 1/4)|error-recovery|
+2025-07-28 19:59:04|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 19:59:04|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 19:59:04|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 19:59:06|DEBUG|Executing HTTP check for https://third.example.com (attempt 2/4)|error-recovery|
+2025-07-28 19:59:06|DEBUG|Executing HTTP check for https://test.example.com (attempt 2/4)|error-recovery|
+2025-07-28 19:59:06|DEBUG|Executing HTTP check for https://another.example.com (attempt 2/4)|error-recovery|
+2025-07-28 19:59:06|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 19:59:06|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 19:59:06|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 19:59:10|DEBUG|Executing HTTP check for https://third.example.com (attempt 3/4)|error-recovery|
+2025-07-28 19:59:10|DEBUG|Executing HTTP check for https://test.example.com (attempt 3/4)|error-recovery|
+2025-07-28 19:59:11|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 19:59:11|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 19:59:11|DEBUG|Executing HTTP check for https://another.example.com (attempt 3/4)|error-recovery|
+2025-07-28 19:59:12|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 19:59:19|DEBUG|Executing HTTP check for https://test.example.com (attempt 4/4)|error-recovery|
+2025-07-28 19:59:19|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 19:59:19|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___test_example_com|error-recovery|
+2025-07-28 19:59:20|DEBUG|Executing HTTP check for https://third.example.com (attempt 4/4)|error-recovery|
+2025-07-28 19:59:20|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 19:59:20|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___third_example_com|error-recovery|
+2025-07-28 19:59:21|DEBUG|Executing HTTP check for https://another.example.com (attempt 4/4)|error-recovery|
+2025-07-28 19:59:21|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 19:59:21|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___another_example_com|error-recovery|
+2025-07-28 20:01:23|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:01:23|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:01:23|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:01:24|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:01:24|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:01:24|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:01:24|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:01:24|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:01:24|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:01:24|DEBUG|Executing HTTP check for https://third.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:01:24|DEBUG|Executing HTTP check for https://test.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:01:24|DEBUG|Executing HTTP check for https://another.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:01:24|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:01:24|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:01:24|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:01:26|DEBUG|Executing HTTP check for https://third.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:01:26|DEBUG|Executing HTTP check for https://test.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:01:26|DEBUG|Executing HTTP check for https://another.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:01:27|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:01:27|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:01:27|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:01:31|DEBUG|Executing HTTP check for https://third.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:01:31|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:01:32|DEBUG|Executing HTTP check for https://test.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:01:32|DEBUG|Executing HTTP check for https://another.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:01:32|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:01:32|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:01:39|DEBUG|Executing HTTP check for https://test.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:01:39|DEBUG|Executing HTTP check for https://another.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:01:39|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:01:39|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:01:39|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___test_example_com|error-recovery|
+2025-07-28 20:01:39|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___another_example_com|error-recovery|
+2025-07-28 20:01:41|DEBUG|Executing HTTP check for https://third.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:01:41|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:01:41|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___third_example_com|error-recovery|
+2025-07-28 20:02:32|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:02:32|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:02:32|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:02:32|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:02:32|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:02:32|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:02:32|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:02:32|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:02:32|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:02:32|DEBUG|Executing HTTP check for https://third.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:02:32|DEBUG|Executing HTTP check for https://another.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:02:32|DEBUG|Executing HTTP check for https://test.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:02:33|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:02:33|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:02:33|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:02:35|DEBUG|Executing HTTP check for https://another.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:02:35|DEBUG|Executing HTTP check for https://third.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:02:35|DEBUG|Executing HTTP check for https://test.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:02:35|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:02:35|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:02:35|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:02:39|DEBUG|Executing HTTP check for https://test.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:02:39|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:02:40|DEBUG|Executing HTTP check for https://another.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:02:40|DEBUG|Executing HTTP check for https://third.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:02:40|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:02:40|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:02:46|DEBUG|Executing HTTP check for https://another.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:02:46|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:02:46|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___another_example_com|error-recovery|
+2025-07-28 20:02:47|DEBUG|Executing HTTP check for https://test.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:02:47|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:02:48|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___test_example_com|error-recovery|
+2025-07-28 20:02:49|DEBUG|Executing HTTP check for https://third.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:02:49|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:02:49|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___third_example_com|error-recovery|
+2025-07-28 20:21:24|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:21:24|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:21:24|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:21:24|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:21:24|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:21:24|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:21:24|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:21:24|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:21:24|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:21:24|DEBUG|Executing HTTP check for https://third.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:21:24|DEBUG|Executing HTTP check for https://test.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:21:24|DEBUG|Executing HTTP check for https://another.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:21:25|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:21:25|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:21:25|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:21:27|DEBUG|Executing HTTP check for https://test.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:21:27|DEBUG|Executing HTTP check for https://third.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:21:27|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:21:27|DEBUG|Executing HTTP check for https://another.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:21:27|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:21:27|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:21:30|DEBUG|Executing HTTP check for https://test.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:21:30|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:21:32|DEBUG|Executing HTTP check for https://third.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:21:32|DEBUG|Executing HTTP check for https://another.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:21:32|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:21:32|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:21:38|DEBUG|Executing HTTP check for https://test.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:21:38|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:21:38|DEBUG|Executing HTTP check for https://third.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:21:38|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:21:38|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___test_example_com|error-recovery|
+2025-07-28 20:21:39|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___third_example_com|error-recovery|
+2025-07-28 20:21:41|DEBUG|Executing HTTP check for https://another.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:21:41|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 20:21:42|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___another_example_com|error-recovery|
+2025-07-28 20:45:48|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:45:48|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:45:48|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:45:48|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:45:48|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:45:48|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:45:51|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:45:51|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:45:51|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:45:51|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 20:45:51|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:45:51|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 20:45:52|DEBUG|Executing HTTP check for https://third.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:45:52|DEBUG|Executing HTTP check for https://test.example.com (attempt 1/4)|error-recovery|
+2025-07-28 20:45:52|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:45:52|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:45:54|DEBUG|Executing HTTP check for https://test.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:45:54|DEBUG|Executing HTTP check for https://third.example.com (attempt 2/4)|error-recovery|
+2025-07-28 20:45:54|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:45:54|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:45:59|DEBUG|Executing HTTP check for https://test.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:45:59|DEBUG|Executing HTTP check for https://third.example.com (attempt 3/4)|error-recovery|
+2025-07-28 20:45:59|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:45:59|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:46:06|DEBUG|Executing HTTP check for https://third.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:46:07|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 20:46:07|DEBUG|Recovery event logged: CIRCUIT_OPENED for WEBSITE_CHECK_https___third_example_com|error-recovery|
+2025-07-28 20:46:07|DEBUG|Executing HTTP check for https://test.example.com (attempt 4/4)|error-recovery|
+2025-07-28 20:46:07|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 20:46:08|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___test_example_com|error-recovery|
+2025-07-28 21:39:42|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:39:42|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:39:42|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:39:42|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:39:42|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:39:42|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:39:42|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:39:42|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:39:42|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:39:42|DEBUG|Executing HTTP check for https://test.example.com (attempt 1/4)|error-recovery|
+2025-07-28 21:39:42|DEBUG|Executing HTTP check for https://another.example.com (attempt 1/4)|error-recovery|
+2025-07-28 21:39:42|DEBUG|Recovery event logged: CIRCUIT_HALF_OPEN for WEBSITE_CHECK_https___third_example_com|error-recovery|
+2025-07-28 21:39:42|DEBUG|Executing HTTP check for https://third.example.com (attempt 1/4)|error-recovery|
+2025-07-28 21:39:42|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:39:43|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 21:39:43|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 21:39:45|DEBUG|Executing HTTP check for https://test.example.com (attempt 2/4)|error-recovery|
+2025-07-28 21:39:45|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:39:45|DEBUG|Executing HTTP check for https://third.example.com (attempt 2/4)|error-recovery|
+2025-07-28 21:39:45|DEBUG|Executing HTTP check for https://another.example.com (attempt 2/4)|error-recovery|
+2025-07-28 21:39:45|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 21:39:45|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 21:39:48|DEBUG|Executing HTTP check for https://third.example.com (attempt 3/4)|error-recovery|
+2025-07-28 21:39:48|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 21:39:49|DEBUG|Executing HTTP check for https://test.example.com (attempt 3/4)|error-recovery|
+2025-07-28 21:39:49|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:39:49|DEBUG|Executing HTTP check for https://another.example.com (attempt 3/4)|error-recovery|
+2025-07-28 21:39:50|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 21:39:55|DEBUG|Executing HTTP check for https://third.example.com (attempt 4/4)|error-recovery|
+2025-07-28 21:39:55|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 21:39:55|DEBUG|Recovery event logged: CIRCUIT_OPENED for WEBSITE_CHECK_https___third_example_com|error-recovery|
+2025-07-28 21:39:55|DEBUG|Executing HTTP check for https://test.example.com (attempt 4/4)|error-recovery|
+2025-07-28 21:39:55|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:39:55|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___test_example_com|error-recovery|
+2025-07-28 21:39:58|DEBUG|Executing HTTP check for https://another.example.com (attempt 4/4)|error-recovery|
+2025-07-28 21:39:58|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 21:39:58|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___another_example_com|error-recovery|
+2025-07-28 21:42:30|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:42:30|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:42:30|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:42:30|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:42:30|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:42:30|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:42:31|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:42:31|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:42:31|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:42:31|DEBUG|Recovery event logged: CIRCUIT_BLOCKED for WEBSITE_CHECK_https___third_example_com|error-recovery|
+2025-07-28 21:42:31|DEBUG|Executing HTTP check for https://another.example.com (attempt 1/4)|error-recovery|
+2025-07-28 21:42:31|DEBUG|Executing HTTP check for https://test.example.com (attempt 1/4)|error-recovery|
+2025-07-28 21:42:31|DEBUG|Recovery event logged: CIRCUIT_BREAKER_BLOCKED for WEBSITE_CHECK_https://third.example.com|error-recovery|
+2025-07-28 21:42:31|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:42:32|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 21:42:33|DEBUG|Executing HTTP check for https://test.example.com (attempt 2/4)|error-recovery|
+2025-07-28 21:42:33|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:42:34|DEBUG|Executing HTTP check for https://another.example.com (attempt 2/4)|error-recovery|
+2025-07-28 21:42:34|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 21:42:37|DEBUG|Executing HTTP check for https://another.example.com (attempt 3/4)|error-recovery|
+2025-07-28 21:42:37|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://another.example.com|error-recovery|
+2025-07-28 21:42:37|DEBUG|Executing HTTP check for https://test.example.com (attempt 3/4)|error-recovery|
+2025-07-28 21:42:38|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:47:45|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:47:45|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:47:45|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:47:45|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:47:45|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:47:45|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:47:48|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:47:48|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:47:48|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:47:48|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-28 21:47:48|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:47:48|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-28 21:47:49|DEBUG|Executing HTTP check for https://test.example.com (attempt 1/4)|error-recovery|
+2025-07-28 21:47:49|DEBUG|Recovery event logged: CIRCUIT_HALF_OPEN for WEBSITE_CHECK_https___third_example_com|error-recovery|
+2025-07-28 21:47:49|DEBUG|Executing HTTP check for https://third.example.com (attempt 1/4)|error-recovery|
+2025-07-28 21:47:49|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:47:49|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 21:47:51|DEBUG|Executing HTTP check for https://test.example.com (attempt 2/4)|error-recovery|
+2025-07-28 21:47:51|DEBUG|Executing HTTP check for https://third.example.com (attempt 2/4)|error-recovery|
+2025-07-28 21:47:51|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:47:51|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 21:47:54|DEBUG|Executing HTTP check for https://test.example.com (attempt 3/4)|error-recovery|
+2025-07-28 21:47:54|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:47:55|DEBUG|Executing HTTP check for https://third.example.com (attempt 3/4)|error-recovery|
+2025-07-28 21:47:55|DEBUG|Recovery event logged: RETRY_ATTEMPT for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 21:48:02|DEBUG|Executing HTTP check for https://test.example.com (attempt 4/4)|error-recovery|
+2025-07-28 21:48:02|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://test.example.com|error-recovery|
+2025-07-28 21:48:03|DEBUG|Recovery event logged: CIRCUIT_OPENED for WEBSITE_CHECK_https___test_example_com|error-recovery|
+2025-07-28 21:48:04|DEBUG|Executing HTTP check for https://third.example.com (attempt 4/4)|error-recovery|
+2025-07-28 21:48:04|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://third.example.com|error-recovery|
+2025-07-28 21:48:05|DEBUG|Recovery event logged: CIRCUIT_OPENED for WEBSITE_CHECK_https___third_example_com|error-recovery|

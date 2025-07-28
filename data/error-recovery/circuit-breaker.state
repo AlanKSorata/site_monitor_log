@@ -1,4 +1,10 @@
-http___nonexistent_invalid_domain|failures|1|2025-07-28 19:38:54
-http___nonexistent_invalid_domain|last_failure|1753702734|2025-07-28 19:38:54
-WEBSITE_CHECK_http___nonexistent_invalid_domain|failures|1|2025-07-28 19:40:14
-WEBSITE_CHECK_http___nonexistent_invalid_domain|last_failure|1753702808|2025-07-28 19:40:14
+WEBSITE_CHECK_https___httpbin_org_status_200|failures|1|2025-07-28 22:40:57
+WEBSITE_CHECK_https___httpbin_org_status_200|last_failure|1753713654|2025-07-28 22:40:57
+WEBSITE_CHECK_http___localhost_8888_nonexistent_html|failures|1|2025-07-28 22:46:11
+WEBSITE_CHECK_http___localhost_8888_nonexistent_html|last_failure|1753713971|2025-07-28 22:46:11
+WEBSITE_CHECK_http___192_0_2_1_80|failures|2|2025-07-28 22:49:36
+WEBSITE_CHECK_http___192_0_2_1_80|last_failure|1753714073|2025-07-28 22:49:36
+WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|failures|1|2025-07-28 22:49:57
+WEBSITE_CHECK_https___this_domain_should_not_exist_12345_com|last_failure|1753714182|2025-07-28 22:49:57
+WEBSITE_CHECK_http___localhost_99999|failures|1|2025-07-28 22:50:13
+WEBSITE_CHECK_http___localhost_99999|last_failure|1753714198|2025-07-28 22:50:13

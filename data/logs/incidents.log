@@ -1,3 +1,23 @@
 2025-01-28 10:01:00|INFO|Incident: DOWNTIME for https://test.example.com|https://test.example.com|DOWNTIME|2m|Website became unavailable
 2025-01-28 10:04:00|INFO|Incident: TIMEOUT for https://another.example.com|https://another.example.com|TIMEOUT|30s|Request timeout
 2025-01-28 10:05:00|INFO|Incident: RECOVERY for https://test.example.com|https://test.example.com|RECOVERY|4m|Website recovered
+2025-07-28 19:59:20|INFO|Incident: DOWNTIME for https://test.example.com|https://test.example.com|DOWNTIME||Website became unavailable
+2025-07-28 19:59:21|INFO|Incident: DOWNTIME for https://third.example.com|https://third.example.com|DOWNTIME||Website became unavailable
+2025-07-28 19:59:21|INFO|Incident: DOWNTIME for https://another.example.com|https://another.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:01:39|INFO|Incident: DOWNTIME for https://test.example.com|https://test.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:01:39|INFO|Incident: DOWNTIME for https://another.example.com|https://another.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:01:41|INFO|Incident: DOWNTIME for https://third.example.com|https://third.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:02:47|INFO|Incident: DOWNTIME for https://another.example.com|https://another.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:02:48|INFO|Incident: DOWNTIME for https://test.example.com|https://test.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:02:50|INFO|Incident: DOWNTIME for https://third.example.com|https://third.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:21:38|INFO|Incident: DOWNTIME for https://test.example.com|https://test.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:21:39|INFO|Incident: DOWNTIME for https://third.example.com|https://third.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:21:42|INFO|Incident: DOWNTIME for https://another.example.com|https://another.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:46:07|INFO|Incident: DOWNTIME for https://third.example.com|https://third.example.com|DOWNTIME||Website became unavailable
+2025-07-28 20:46:08|INFO|Incident: DOWNTIME for https://test.example.com|https://test.example.com|DOWNTIME||Website became unavailable
+2025-07-28 21:39:55|INFO|Incident: DOWNTIME for https://third.example.com|https://third.example.com|DOWNTIME||Website became unavailable
+2025-07-28 21:39:55|INFO|Incident: DOWNTIME for https://test.example.com|https://test.example.com|DOWNTIME||Website became unavailable
+2025-07-28 21:39:58|INFO|Incident: DOWNTIME for https://another.example.com|https://another.example.com|DOWNTIME||Website became unavailable
+2025-07-28 21:42:31|INFO|Incident: DOWNTIME for https://third.example.com|https://third.example.com|DOWNTIME||Website became unavailable
+2025-07-28 21:48:03|INFO|Incident: DOWNTIME for https://test.example.com|https://test.example.com|DOWNTIME||Website became unavailable
+2025-07-28 21:48:05|INFO|Incident: DOWNTIME for https://third.example.com|https://third.example.com|DOWNTIME||Website became unavailable

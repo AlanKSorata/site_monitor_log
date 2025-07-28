@@ -789,11 +789,38 @@ if ! init_error_recovery; then
     echo "WARNING: Failed to initialize error recovery system" >&2
 fi
 
+#
+# Reset circuit breaker state for testing
+# Arguments:
+#   $1 - Circuit name (optional, if not provided resets all circuits)
+#
+reset_circuit_breaker() {
+    local circuit_name="$1"
+    
+    # Ensure error recovery directories exist
+    ensure_directory "$ERROR_STATE_DIR"
+    
+    if [ -n "$circuit_name" ]; then
+        # Reset specific circuit
+        if [ -f "$CIRCUIT_BREAKER_STATE_FILE" ]; then
+            grep -v "^${circuit_name}|" "$CIRCUIT_BREAKER_STATE_FILE" > "${CIRCUIT_BREAKER_STATE_FILE}.tmp" 2>/dev/null
+            mv "${CIRCUIT_BREAKER_STATE_FILE}.tmp" "$CIRCUIT_BREAKER_STATE_FILE" 2>/dev/null
+        fi
+        log_recovery_event "$circuit_name" "CIRCUIT_RESET" "Circuit breaker state reset for testing"
+    else
+        # Reset all circuits
+        rm -f "$CIRCUIT_BREAKER_STATE_FILE"
+        log_recovery_event "ALL_CIRCUITS" "CIRCUIT_RESET" "All circuit breaker states reset for testing"
+    fi
+    
+    return 0
+}
+
 # Export key functions
 export -f calculate_exponential_backoff retry_with_exponential_backoff circuit_breaker
 export -f graceful_degradation daemon_recovery_restart health_check_with_recovery
 export -f categorize_error handle_comprehensive_error log_recovery_event
-export -f cleanup_recovery_data get_recovery_statistics
+export -f cleanup_recovery_data get_recovery_statistics reset_circuit_breaker
 
 export ERROR_STATE_DIR CIRCUIT_BREAKER_STATE_FILE RETRY_STATE_FILE RECOVERY_LOG_FILE
 export DEFAULT_MAX_RETRIES DEFAULT_INITIAL_BACKOFF DEFAULT_MAX_BACKOFF
