@@ -141,3 +141,9 @@
 2025-07-29 11:39:26|INFO|Website check successful: 哔哩哔哩|https://www.bilibili.com|200|390|UP
 2025-07-29 11:39:27|INFO|Website check successful: 百度|https://www.baidu.com|200|262|UP
 2025-07-29 11:40:26|INFO|Service recovered after 1 failures|website-monitor|0|0|INFO
+[2025-07-29 12:39:27] [INFO] Reading websites configuration from: /mnt/e/pro_oriented/learn/tmp_space/config/websites.conf
+[2025-07-29 12:39:27] [INFO] Reading websites configuration from: /mnt/e/pro_oriented/learn/tmp_space/config/websites.conf
+[2025-07-29 12:39:27] [INFO] Loaded 2 website(s) from configuration
+[2025-07-29 12:39:27] [INFO] Loaded 2 website(s) from configuration
+2025-07-29 12:39:29|INFO|Website check successful: 哔哩哔哩|https://www.bilibili.com|200|518|UP
+2025-07-29 12:39:29|INFO|Website check successful: 百度|https://www.baidu.com|200|408|UP

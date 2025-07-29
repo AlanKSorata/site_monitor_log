@@ -130,19 +130,12 @@ web/
 
 ### 生产环境命令
 
-```bash
+````bash
 # nginx配置管理
 sudo ./bin/fix-nginx-config.sh check    # 检查配置
 sudo ./bin/fix-nginx-config.sh fix      # 修复配置
 sudo ./bin/fix-nginx-config.sh install  # 安装配置
 sudo ./bin/fix-nginx-config.sh test     # 测试配置
-
-# 服务管理
-sudo systemctl start website-monitor-nginx    # 启动服务
-sudo systemctl stop website-monitor-nginx     # 停止服务
-sudo systemctl status website-monitor-nginx   # 查看状态
-sudo journalctl -u website-monitor-nginx -f   # 查看日志
-```
 
 ## 🌐 访问地址
 
@@ -159,16 +152,6 @@ sudo journalctl -u website-monitor-nginx -f   # 查看日志
 - 主页: http://localhost:端口/
 - API 接口: http://localhost:端口/api/
 - 历史报告: http://localhost:端口/reports/
-
-## 🎨 界面特性
-
-### 增强版报告界面
-
-- 现代化卡片式设计
-- 实时状态颜色编码（绿色/橙色/红色/灰色）
-- 自动刷新功能（可配置间隔）
-- 响应式布局，支持移动设备
-- 统计面板显示整体状态
 
 ### API 接口
 
@@ -187,7 +170,7 @@ sudo journalctl -u website-monitor-nginx -f   # 查看日志
    # 使用修复工具
    sudo ./bin/fix-nginx-config.sh fix
    sudo ./bin/fix-nginx-config.sh install
-   ```
+````
 
 2. **权限问题**
 
@@ -288,5 +271,3 @@ sudo systemctl start website-monitor-nginx
 2. **测试阶段**: 使用 nginx 配置进行性能和稳定性测试
 3. **生产阶段**: 使用完整的 systemd 服务进行部署
 4. **监控阶段**: 定期检查日志和系统状态
-
-通过这个解决方案，你可以根据需要选择合适的部署方式，既解决了 nginx 配置问题，又提供了灵活的开发和生产环境选项。

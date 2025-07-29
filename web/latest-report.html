@@ -3,8 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网站监控报告</title>
+    <title>网站监控仪表板</title>
     <style>
+        :root {
+            /* 现代化配色方案 */
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --secondary-color: #6b7280;
+            
+            /* 背景色 */
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            
+            /* 文字颜色 */
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            
+            /* 边框和阴影 */
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            /* 圆角 */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+        }
+        
+        /* 暗色主题 */
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,225 +56,100 @@
         }
         
         body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
         }
         
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
+            padding: 1.5rem;
         }
         
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .header .subtitle {
-            font-size: 1.1em;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-        
-        .refresh-info {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-        }
-        
-        .stats-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 30px;
-            background: #f8f9fa;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .stat-card .number {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .stat-card .label {
-            color: #666;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .stat-card.total .number { color: #3498db; }
-        .stat-card.up .number { color: #27ae60; }
-        .stat-card.down .number { color: #e74c3c; }
-        .stat-card.avg-time .number { color: #f39c12; }
-        
-        .main-content {
-            padding: 30px;
-        }
-        
-        .section-title {
-            font-size: 1.8em;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #3498db;
-        }
-        
-        .websites-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .website-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-left: 5px solid #ddd;
-            transition: all 0.3s ease;
-        }
-        
-        .website-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-        }
-        
-        .website-card.status-green { border-left-color: #27ae60; }
-        .website-card.status-orange { border-left-color: #f39c12; }
-        .website-card.status-red { border-left-color: #e74c3c; }
-        .website-card.status-gray { border-left-color: #95a5a6; }
-        
-        .website-header {
+        /* 顶部导航栏 */
+        .navbar {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
         }
         
-        .website-name {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2c3e50;
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         
-        .status-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .status-badge.green {
-            background: #d5f4e6;
-            color: #27ae60;
-        }
-        
-        .status-badge.orange {
-            background: #fef9e7;
-            color: #f39c12;
-        }
-        
-        .status-badge.red {
-            background: #fadbd8;
-            color: #e74c3c;
-        }
-        
-        .status-badge.gray {
-            background: #ecf0f1;
-            color: #95a5a6;
-        }
-        
-        .website-url {
-            color: #7f8c8d;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-            word-break: break-all;
-        }
-        
-        .website-metrics {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        
-        .metric {
-            text-align: center;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        
-        .metric-value {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .metric-label {
-            font-size: 0.8em;
-            color: #666;
-            text-transform: uppercase;
-        }
-        
-        .last-check {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            font-size: 0.85em;
-            color: #7f8c8d;
-            text-align: center;
-        }
-        
-        .footer {
-            background: #2c3e50;
+        .navbar-brand .icon {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
+            font-size: 1.5rem;
         }
         
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3498db;
+        .navbar-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .navbar-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .navbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+        
+        .theme-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .refresh-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .refresh-spinner {
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid var(--border-color);
+            border-top: 2px solid var(--primary-color);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -240,147 +159,505 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* 统计卡片网格 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .stat-card-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: white;
+        }
+        
+        .stat-card-icon.total { background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); }
+        .stat-card-icon.success { background: linear-gradient(135deg, var(--success-color), #059669); }
+        .stat-card-icon.danger { background: linear-gradient(135deg, var(--danger-color), #dc2626); }
+        .stat-card-icon.warning { background: linear-gradient(135deg, var(--warning-color), #d97706); }
+        
+        .stat-card-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .stat-card-change.positive { color: var(--success-color); }
+        .stat-card-change.negative { color: var(--danger-color); }
+        .stat-card-change.neutral { color: var(--text-secondary); }
+        
+        /* 网站监控卡片 */
+        .websites-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .section-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .website-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .website-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .website-card.status-success { border-left: 4px solid var(--success-color); }
+        .website-card.status-warning { border-left: 4px solid var(--warning-color); }
+        .website-card.status-danger { border-left: 4px solid var(--danger-color); }
+        .website-card.status-secondary { border-left: 4px solid var(--secondary-color); }
+        
+        .website-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .website-info h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .website-url {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .status-indicator.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status-indicator.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .status-indicator.danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .status-indicator.secondary {
+            background: rgba(107, 114, 128, 0.1);
+            color: var(--secondary-color);
+        }
+        
+        .website-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .last-check {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        
+        /* 响应式设计 */
         @media (max-width: 768px) {
             .container {
-                margin: 10px;
-                border-radius: 10px;
+                padding: 1rem;
             }
             
-            .header {
-                padding: 20px;
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
             }
             
-            .header h1 {
-                font-size: 2em;
+            .navbar-controls {
+                justify-content: center;
             }
             
-            .stats-overview {
+            .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
-                padding: 20px;
-                gap: 15px;
+                gap: 1rem;
             }
             
             .websites-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
             }
             
-            .main-content {
-                padding: 20px;
+            .website-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navbar-brand .icon {
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.25rem;
+            }
+            
+            .navbar-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* 动画效果 */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.4s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
+</head>
+<body data-theme="light">
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="navbar fade-in">
+            <div class="navbar-brand">
+                <div class="icon">
+                    📊
+                </div>
+                <div>
+                    <div class="navbar-title">网站监控仪表板</div>
+                    <div class="navbar-subtitle">实时监控 · 高效分析</div>
+                </div>
+            </div>
+            <div class="navbar-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    🌙
+                </button>
+                <div class="refresh-status">
+                    <div class="refresh-spinner"></div>
+                    <span>自动刷新已启用</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 统计概览 -->
+        <div class="stats-grid fade-in">
+            <div class="stat-card slide-up">
+                <div class="stat-card-header">
+                    <div class="stat-card-title">监控网站</div>
+                    <div class="stat-card-icon total">
+                        🌐
+                    </div>
+                </div>
+                <div class="stat-card-value">2</div>
+                <div class="stat-card-change neutral">
+                    ℹ️ 总计监控站点
+                </div>
+            </div>
+
+            <div class="stat-card slide-up">
+                <div class="stat-card-header">
+                    <div class="stat-card-title">正常运行</div>
+                    <div class="stat-card-icon success">
+                        ✅
+                    </div>
+                </div>
+                <div class="stat-card-value">2</div>
+                <div class="stat-card-change positive">
+                    📈 100% 可用性
+                </div>
+            </div>
+
+            <div class="stat-card slide-up">
+                <div class="stat-card-header">
+                    <div class="stat-card-title">异常状态</div>
+                    <div class="stat-card-icon danger">
+                        ⚠️
+                    </div>
+                </div>
+                <div class="stat-card-value">0</div>
+                <div class="stat-card-change positive">
+                    ✅ 全部正常
+                </div>
+            </div>
+
+            <div class="stat-card slide-up">
+                <div class="stat-card-header">
+                    <div class="stat-card-title">平均响应</div>
+                    <div class="stat-card-icon warning">
+                        ⏱️
+                    </div>
+                </div>
+                <div class="stat-card-value">200ms</div>
+                <div class="stat-card-change positive">
+                    ⚡ 响应良好
+                </div>
+            </div>
+        </div>
+
+        <!-- 网站详情 -->
+        <div class="websites-section fade-in">
+            <div class="section-header">
+                <div>
+                    <div class="section-title">网站监控详情</div>
+                    <div class="section-subtitle">实时状态 · 性能指标 · 历史数据</div>
+                </div>
+            </div>
+
+            <div class="websites-grid">
+                <div class="website-card status-success slide-up">
+                    <div class="website-header">
+                        <div class="website-info">
+                            <h3>百度</h3>
+                            <div class="website-url">https://www.baidu.com</div>
+                        </div>
+                        <div class="status-indicator success">
+                            <span>✅</span>
+                            <span>正常运行</span>
+                        </div>
+                    </div>
+                    
+                    <div class="website-metrics">
+                        <div class="metric">
+                            <div class="metric-value">100%</div>
+                            <div class="metric-label">可用性</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">200ms</div>
+                            <div class="metric-label">响应时间</div>
+                        </div>
+                    </div>
+                    
+                    <div class="last-check">
+                        🕒 最后检查: 2025-07-29 12:39:29
+                    </div>
+                </div>
+                <div class="website-card status-success slide-up">
+                    <div class="website-header">
+                        <div class="website-info">
+                            <h3>哔哩哔哩</h3>
+                            <div class="website-url">https://www.bilibili.com</div>
+                        </div>
+                        <div class="status-indicator success">
+                            <span>✅</span>
+                            <span>正常运行</span>
+                        </div>
+                    </div>
+                    
+                    <div class="website-metrics">
+                        <div class="metric">
+                            <div class="metric-value">100%</div>
+                            <div class="metric-label">可用性</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">200ms</div>
+                            <div class="metric-label">响应时间</div>
+                        </div>
+                    </div>
+                    
+                    <div class="last-check">
+                        🕒 最后检查: 2025-07-29 12:39:29
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // 自动刷新功能
-        let refreshInterval = 60;
-        let countdown = refreshInterval;
-        
-        function updateCountdown() {
-            const refreshElement = document.getElementById('refresh-countdown');
-            if (refreshElement) {
-                refreshElement.textContent = countdown + 's';
-            }
+        // 主题切换功能
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
             
-            countdown--;
-            if (countdown < 0) {
-                location.reload();
+            if (currentTheme === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
             }
         }
         
-        // 每秒更新倒计时
-        setInterval(updateCountdown, 1000);
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+        }
         
-        // 页面可见性变化时暂停/恢复刷新
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            
+            // 添加动画延迟
+            const cards = document.querySelectorAll('.slide-up');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+        
+        // 自动刷新功能
+        let refreshInterval = 300 * 1000; // 转换为毫秒
+        
+        // 设置自动刷新
+        setTimeout(function() {
+            location.reload();
+        }, refreshInterval);
+        
+        // 页面可见性变化时重新设置刷新
         document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                // 页面隐藏时暂停倒计时
-            } else {
-                // 页面显示时重置倒计时
-                countdown = refreshInterval;
+            if (!document.hidden) {
+                setTimeout(function() {
+                    location.reload();
+                }, refreshInterval);
             }
         });
     </script>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>网站监控报告</h1>
-            <div class="subtitle">实时监控 · 智能分析 · 可视化展示</div>
-            <div class="refresh-info">
-                <span class="loading"></span>
-                自动刷新: <span id="refresh-countdown">60s</span>
-            </div>
-        </div>
-        
-        <div class="stats-overview">
-            <div class="stat-card total">
-                <div class="number">2</div>
-                <div class="label">监控网站</div>
-            </div>
-            <div class="stat-card up">
-                <div class="number">2</div>
-                <div class="label">正常运行</div>
-            </div>
-            <div class="stat-card down">
-                <div class="number">0</div>
-                <div class="label">异常状态</div>
-            </div>
-            <div class="stat-card avg-time">
-                <div class="number">200ms</div>
-                <div class="label">平均响应</div>
-            </div>
-        </div>
-        
-        <div class="main-content">
-            <h2 class="section-title">网站状态详情</h2>
-            <div class="websites-grid">
-                <div class="website-card status-green">
-                    <div class="website-header">
-                        <div class="website-name">百度</div>
-                        <div class="status-badge green">正常</div>
-                    </div>
-                    <div class="website-url">https://www.baidu.com</div>
-                    <div class="website-metrics">
-                        <div class="metric">
-                            <div class="metric-value">100%</div>
-                            <div class="metric-label">可用性</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">200ms</div>
-                            <div class="metric-label">响应时间</div>
-                        </div>
-                    </div>
-                    <div class="last-check">
-                        最后检查: 2025-07-29 11:39:27
-                    </div>
-                </div>
-                <div class="website-card status-green">
-                    <div class="website-header">
-                        <div class="website-name">哔哩哔哩</div>
-                        <div class="status-badge green">正常</div>
-                    </div>
-                    <div class="website-url">https://www.bilibili.com</div>
-                    <div class="website-metrics">
-                        <div class="metric">
-                            <div class="metric-value">100%</div>
-                            <div class="metric-label">可用性</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">200ms</div>
-                            <div class="metric-label">响应时间</div>
-                        </div>
-                    </div>
-                    <div class="last-check">
-                        最后检查: 2025-07-29 11:39:26
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>报告生成时间: 2025-07-29 11:48:28 | 网站监控系统 v2.0</p>
-            <p>数据更新间隔: 每60秒自动刷新</p>
-        </div>
-    </div>
 </body>
 </html>

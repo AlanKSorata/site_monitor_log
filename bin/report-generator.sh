@@ -1,115 +1,58 @@
 #!/bin/bash
 
-# Report Generation System
-# Generates comprehensive monitoring reports from log data
+# 最终报告生成器 - 现代化样式
+# 生成现代化风格的HTML监控报告，输出到latest-report.html
 
 set -euo pipefail
 
-# Get script directory and source utilities
+# 获取脚本目录和项目根目录
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 LIB_DIR="$PROJECT_ROOT/lib"
 
-# Source required libraries
+# 引入必要的库
 source "$LIB_DIR/common.sh"
 source "$LIB_DIR/log-utils.sh"
 
-# Default configuration
-DEFAULT_FORMAT="text"
-DEFAULT_PERIOD="daily"
-DEFAULT_OUTPUT_FILE=""
-DEFAULT_START_DATE=""
-DEFAULT_END_DATE=""
-
-# Default report directory
-DEFAULT_REPORTS_DIR="data/reports"
-
-# Report configuration
-REPORT_TITLE="Website Monitoring Report"
-REPORT_VERSION="1.0"
+# 默认配置
+DEFAULT_OUTPUT_FILE="$PROJECT_ROOT/web/latest-report.html"
+DEFAULT_REFRESH_INTERVAL=300
 
 show_usage() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
-    echo "Generate comprehensive monitoring reports from log data."
+    echo "生成现代化风格的HTML监控报告"
     echo ""
     echo "OPTIONS:"
-    echo "    -f, --format FORMAT     Output format: text, html, csv (default: $DEFAULT_FORMAT)"
-    echo "    -p, --period PERIOD     Report period: daily, weekly, monthly, custom (default: $DEFAULT_PERIOD)"
-    echo "    -o, --output FILE       Output file path (default: auto-generated in $DEFAULT_REPORTS_DIR)"
-    echo "    -s, --start-date DATE   Start date for custom period (YYYY-MM-DD)"
-    echo "    -e, --end-date DATE     End date for custom period (YYYY-MM-DD)"
-    echo "    -w, --website URL       Generate report for specific website only"
-    echo "    -v, --verbose           Enable verbose output"
-    echo "    -h, --help             Show this help message"
-    echo ""
-    echo "EXAMPLES:"
-    echo "    $0 --format text --period daily"
-    echo "    $0 --format html --period weekly --output weekly-report.html"
-    echo "    $0 --format csv --period custom --start-date 2025-01-01 --end-date 2025-01-31"
-    echo ""
-    echo "NOTE:"
-    echo "    When no output file is specified, reports are automatically saved to:"
-    echo "    $DEFAULT_REPORTS_DIR/report-YYYYMMDD-HHMMSS.{txt|html|csv}"
+    echo "    -o, --output FILE       输出文件路径 (默认: $DEFAULT_OUTPUT_FILE)"
+    echo "    -r, --refresh SECONDS   自动刷新间隔秒数 (默认: $DEFAULT_REFRESH_INTERVAL, 0=禁用)"
+    echo "    -t, --title TITLE       报告标题 (默认: 网站监控仪表板)"
+    echo "    -v, --verbose           启用详细输出"
+    echo "    -h, --help             显示此帮助信息"
     echo ""
 }
 
 parse_arguments() {
-    local format="$DEFAULT_FORMAT"
-    local period="$DEFAULT_PERIOD"
     local output_file="$DEFAULT_OUTPUT_FILE"
-    local start_date="$DEFAULT_START_DATE"
-    local end_date="$DEFAULT_END_DATE"
-    local website=""
+    local refresh_interval="$DEFAULT_REFRESH_INTERVAL"
+    local report_title="网站监控仪表板"
     local verbose=false
-
+    
     while [[ $# -gt 0 ]]; do
         case $1 in
-            -f|--format)
-                format="$2"
-                case "$format" in
-                    text|html|csv)
-                        ;;
-                    *)
-                        die "Invalid format: $format (must be text, html, or csv)" 2
-                        ;;
-                esac
-                shift 2
-                ;;
-            -p|--period)
-                period="$2"
-                case "$period" in
-                    daily|weekly|monthly|custom)
-                        ;;
-                    *)
-                        die "Invalid period: $period (must be daily, weekly, monthly, or custom)" 2
-                        ;;
-                esac
-                shift 2
-                ;;
             -o|--output)
                 output_file="$2"
                 shift 2
                 ;;
-            -s|--start-date)
-                start_date="$2"
-                if ! validate_date_format "$start_date"; then
-                    die "Invalid start date format: $start_date (use YYYY-MM-DD)" 2
+            -r|--refresh)
+                refresh_interval="$2"
+                if ! [[ "$refresh_interval" =~ ^[0-9]+$ ]]; then
+                    die "刷新间隔必须是数字" 2
                 fi
                 shift 2
                 ;;
-            -e|--end-date)
-                end_date="$2"
-                if ! validate_date_format "$end_date"; then
-                    die "Invalid end date format: $end_date (use YYYY-MM-DD)" 2
-                fi
-                shift 2
-                ;;
-            -w|--website)
-                website="$2"
-                if ! is_valid_url "$website"; then
-                    die "Invalid website URL: $website" 2
-                fi
+            -t|--title)
+                report_title="$2"
                 shift 2
                 ;;
             -v|--verbose)
@@ -121,544 +64,916 @@ parse_arguments() {
                 exit 0
                 ;;
             *)
-                die "Unknown option: $1" 2
+                die "未知选项: $1" 2
                 ;;
         esac
     done
-
-    # Validate custom period requirements
-    if [ "$period" = "custom" ]; then
-        if [ -z "$start_date" ] || [ -z "$end_date" ]; then
-            die "Custom period requires both --start-date and --end-date" 2
-        fi
-        
-        # Validate date order (allow same date)
-        if ! is_date_before_or_equal "$start_date" "$end_date"; then
-            die "Start date must be before or equal to end date" 2
-        fi
-    fi
-
-    # Export configuration
-    export REPORT_FORMAT="$format"
-    export REPORT_PERIOD="$period"
-    export REPORT_OUTPUT_FILE="$output_file"
-    export REPORT_START_DATE="$start_date"
-    export REPORT_END_DATE="$end_date"
-    export REPORT_WEBSITE="$website"
-    export REPORT_VERBOSE="$verbose"
+    
+    export FINAL_OUTPUT_FILE="$output_file"
+    export FINAL_REFRESH_INTERVAL="$refresh_interval"
+    export FINAL_REPORT_TITLE="$report_title"
+    export FINAL_VERBOSE="$verbose"
 }
 
-validate_date_format() {
-    local date_str="$1"
+# 获取网站配置信息
+get_website_configs() {
+    local configs_file="$PROJECT_ROOT/config/websites.conf"
+    local temp_file=$(mktemp)
     
-    if [[ ! "$date_str" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
-        return 1
-    fi
-    
-    # Try to parse the date to ensure it's valid
-    if ! date -d "$date_str" >/dev/null 2>&1; then
-        return 1
-    fi
-    
-    return 0
-}
-
-is_date_before() {
-    local date1="$1"
-    local date2="$2"
-    
-    local epoch1
-    local epoch2
-    
-    epoch1=$(date -d "$date1" +%s 2>/dev/null) || return 1
-    epoch2=$(date -d "$date2" +%s 2>/dev/null) || return 1
-    
-    [ "$epoch1" -lt "$epoch2" ]
-}
-
-is_date_before_or_equal() {
-    local date1="$1"
-    local date2="$2"
-    
-    local epoch1
-    local epoch2
-    
-    epoch1=$(date -d "$date1" +%s 2>/dev/null) || return 1
-    epoch2=$(date -d "$date2" +%s 2>/dev/null) || return 1
-    
-    [ "$epoch1" -le "$epoch2" ]
-}
-
-calculate_date_range() {
-    local period="$1"
-    local start_date=""
-    local end_date=""
-    
-    # Default to current day if no specific period is set
-    local current_date=$(date '+%Y-%m-%d')
-    
-    case "$period" in
-        daily)
-            # If no start/end dates specified, default to current day
-            if [ -z "$REPORT_START_DATE" ] && [ -z "$REPORT_END_DATE" ]; then
-                start_date="$current_date"
-                end_date="$current_date"
-            else
-                start_date=$(date -d '1 day ago' '+%Y-%m-%d')
-                end_date="$current_date"
-            fi
-            ;;
-        weekly)
-            start_date=$(date -d '7 days ago' '+%Y-%m-%d')
-            end_date="$current_date"
-            ;;
-        monthly)
-            start_date=$(date -d '30 days ago' '+%Y-%m-%d')
-            end_date="$current_date"
-            ;;
-        custom)
-            start_date="$REPORT_START_DATE"
-            end_date="$REPORT_END_DATE"
-            ;;
-        *)
-            # Default case: current day
-            start_date="$current_date"
-            end_date="$current_date"
-            ;;
-    esac
-    
-    echo "$start_date|$end_date"
-}
-
-is_date_in_range() {
-    local check_date="$1"
-    local start_date="$2"
-    local end_date="$3"
-    
-    local check_epoch
-    local start_epoch
-    local end_epoch
-    
-    check_epoch=$(date -d "$check_date" +%s 2>/dev/null) || return 1
-    start_epoch=$(date -d "$start_date" +%s 2>/dev/null) || return 1
-    end_epoch=$(date -d "$end_date 23:59:59" +%s 2>/dev/null) || return 1
-    
-    [ "$check_epoch" -ge "$start_epoch" ] && [ "$check_epoch" -le "$end_epoch" ]
-}
-
-parse_monitoring_logs() {
-    local start_date="$1"
-    local end_date="$2"
-    local website_filter="$3"
-    
-    local temp_file="$DATA_DIR/temp/monitoring_data_$$.tmp"
-    ensure_directory "$(dirname "$temp_file")"
-    
-    # Parse main monitoring log
-    if [ -f "$MAIN_LOG_FILE" ]; then
-        local processed_lines=0
-        local filtered_lines=0
+    if [ -f "$configs_file" ]; then
         while IFS= read -r line; do
-            processed_lines=$((processed_lines + 1))
-            
-            # Skip empty lines
-            if [ -z "$line" ]; then
+            # 跳过注释和空行
+            if [[ "$line" =~ ^#.*$ ]] || [ -z "$line" ]; then
                 continue
             fi
             
-            # Only match monitoring lines with the specific format:
-            # timestamp|level|message|url|response_time|status_code|final_status
-            # Example: 2025-07-27 08:40:42|ERROR|Website check failed: Google|https://www.google.com|0|0|DOWN
-            if [[ ! "$line" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}\ [0-9]{2}:[0-9]{2}:[0-9]{2}\|.*\|.*\|https?://.*\|[0-9]+\|[0-9]+\|.* ]]; then
-                continue
+            # 解析配置: URL|名称|间隔|超时|内容检查
+            IFS='|' read -r url name interval timeout content_check <<< "$line"
+            
+            if [ -n "$url" ] && [ -n "$name" ]; then
+                echo "$url|$name|$interval|$timeout|$content_check" >> "$temp_file"
             fi
-            
-            # Parse the monitoring line with 7 fields
-            IFS='|' read -r timestamp level message url response_time status_code final_status <<< "$line"
-            
-            # Skip malformed entries (must have all required fields)
-            if [ -z "$timestamp" ] || [ -z "$level" ] || [ -z "$url" ] || [ -z "$final_status" ]; then
-                continue
-            fi
-            
-            # Extract date from timestamp
-            local entry_date
-            entry_date=$(echo "$timestamp" | cut -d' ' -f1)
-            
-            # Check if entry is within date range
-            if ! is_date_in_range "$entry_date" "$start_date" "$end_date"; then
-                continue
-            fi
-            
-            # Apply website filter if specified
-            if [ -n "$website_filter" ] && [ "$url" != "$website_filter" ]; then
-                continue
-            fi
-            
-            # Write parsed entry to temp file in standardized format
-            echo "$timestamp|$url|$status_code|$response_time|$final_status|$message" >> "$temp_file"
-            filtered_lines=$((filtered_lines + 1))
-            
-        done < "$MAIN_LOG_FILE"
-        
-        if [ "$REPORT_VERBOSE" = true ]; then
-            log_info "Processed $processed_lines lines, filtered $filtered_lines valid entries"
-        fi
+        done < "$configs_file"
     fi
     
     echo "$temp_file"
 }
 
-calculate_availability_stats() {
-    local monitoring_data_file="$1"
-    local website_filter="$2"
+# 分析监控数据
+analyze_monitoring_data() {
+    local website_configs="$1"
+    local temp_file=$(mktemp)
     
-    if [ ! -f "$monitoring_data_file" ]; then
-        return 1
-    fi
+    # 获取最近24小时的数据
+    local cutoff_time=$(date -d '24 hours ago' '+%Y-%m-%d %H:%M:%S')
     
-    # Get unique websites
-    local websites
-    if [ -n "$website_filter" ]; then
-        websites="$website_filter"
-    else
-        websites=$(cut -d'|' -f2 "$monitoring_data_file" | sort -u)
-    fi
-    
-    local stats_file="$DATA_DIR/temp/availability_stats_$$.tmp"
-    
-    for website in $websites; do
-        local total_checks=0
-        local up_checks=0
-        local down_checks=0
-        local error_checks=0
-        
-        while IFS='|' read -r timestamp url status_code response_time status message; do
-            if [ "$url" = "$website" ]; then
-                total_checks=$((total_checks + 1))
+    if [ -f "$MAIN_LOG_FILE" ]; then
+        while IFS='|' read -r url name interval timeout content_check; do
+            local latest_status="UNKNOWN"
+            local latest_response_time=0
+            local latest_timestamp=""
+            local status_color="secondary"
+            local status_icon="❓"
+            
+            # 查找该网站的最新记录
+            local latest_entry
+            latest_entry=$(grep "|$url|" "$MAIN_LOG_FILE" | tail -1)
+            
+            if [ -n "$latest_entry" ]; then
+                IFS='|' read -r timestamp level message check_url response_time status_code final_status <<< "$latest_entry"
                 
-                case "$status" in
-                    UP|CONTENT_INITIAL|CONTENT_CHANGED|CONTENT_UNCHANGED)
-                        up_checks=$((up_checks + 1))
-                        ;;
-                    DOWN|TIMEOUT|ERROR)
-                        down_checks=$((down_checks + 1))
-                        ;;
-                    *)
-                        error_checks=$((error_checks + 1))
-                        ;;
-                esac
-            fi
-        done < "$monitoring_data_file"
-        
-        # Calculate availability percentage
-        local availability_percent=0
-        if [ "$total_checks" -gt 0 ]; then
-            availability_percent=$(( (up_checks * 100) / total_checks ))
-        fi
-        
-        echo "$website|$total_checks|$up_checks|$down_checks|$error_checks|$availability_percent" >> "$stats_file"
-    done
-    
-    echo "$stats_file"
-}
-
-calculate_response_time_stats() {
-    local monitoring_data_file="$1"
-    local website_filter="$2"
-    
-    if [ ! -f "$monitoring_data_file" ]; then
-        return 1
-    fi
-    
-    # Get unique websites
-    local websites
-    if [ -n "$website_filter" ]; then
-        websites="$website_filter"
-    else
-        websites=$(cut -d'|' -f2 "$monitoring_data_file" | sort -u)
-    fi
-    
-    local stats_file="$DATA_DIR/temp/response_time_stats_$$.tmp"
-    
-    for website in $websites; do
-        local response_times=()
-        local total_time=0
-        local count=0
-        local min_time=999999
-        local max_time=0
-        
-        while IFS='|' read -r timestamp url status_code response_time status message; do
-            if [ "$url" = "$website" ] && [ -n "$response_time" ] && [ "$response_time" != "0" ]; then
-                response_times+=("$response_time")
-                total_time=$((total_time + response_time))
-                count=$((count + 1))
-                
-                if [ "$response_time" -lt "$min_time" ]; then
-                    min_time="$response_time"
-                fi
-                
-                if [ "$response_time" -gt "$max_time" ]; then
-                    max_time="$response_time"
+                if [ "$check_url" = "$url" ]; then
+                    latest_status="$final_status"
+                    latest_response_time="$response_time"
+                    latest_timestamp="$timestamp"
+                    
+                    # 确定状态颜色和图标
+                    case "$final_status" in
+                        UP|CONTENT_INITIAL|CONTENT_UNCHANGED)
+                            status_color="success"
+                            status_icon="✅"
+                            ;;
+                        CONTENT_CHANGED)
+                            status_color="warning"
+                            status_icon="⚠️"
+                            ;;
+                        DOWN|TIMEOUT|ERROR)
+                            status_color="danger"
+                            status_icon="❌"
+                            ;;
+                        *)
+                            status_color="secondary"
+                            status_icon="❓"
+                            ;;
+                    esac
                 fi
             fi
-        done < "$monitoring_data_file"
-        
-        # Calculate average response time
-        local avg_time=0
-        if [ "$count" -gt 0 ]; then
-            avg_time=$((total_time / count))
-        else
-            min_time=0
-            max_time=0
-        fi
-        
-        echo "$website|$count|$avg_time|$min_time|$max_time" >> "$stats_file"
-    done
-    
-    echo "$stats_file"
-}
-
-generate_text_report() {
-    local start_date="$1"
-    local end_date="$2"
-    local availability_stats_file="$3"
-    local response_time_stats_file="$4"
-    
-    echo "================================================================================"
-    echo "                        $REPORT_TITLE"
-    echo "================================================================================"
-    echo ""
-    echo "Report Period: $start_date to $end_date"
-    echo "Generated: $(date '+%Y-%m-%d %H:%M:%S')"
-    echo "Report Version: $REPORT_VERSION"
-    echo ""
-    echo "================================================================================"
-    echo "                           AVAILABILITY SUMMARY"
-    echo "================================================================================"
-    echo ""
-
-    if [ -f "$availability_stats_file" ]; then
-        printf "%-40s %8s %8s %8s %8s %12s\n" "Website" "Total" "Up" "Down" "Error" "Availability"
-        printf "%-40s %8s %8s %8s %8s %12s\n" "$(printf '%40s' | tr ' ' '-')" "--------" "--------" "--------" "--------" "------------"
-        
-        while IFS='|' read -r website total_checks up_checks down_checks error_checks availability_percent; do
-            printf "%-40s %8d %8d %8d %8d %10d%%\n" \
-                "$website" "$total_checks" "$up_checks" "$down_checks" "$error_checks" "$availability_percent"
-        done < "$availability_stats_file"
-    else
-        echo "No availability data found for the specified period."
-    fi
-
-    echo ""
-    echo "================================================================================"
-    echo "                        RESPONSE TIME STATISTICS"
-    echo "================================================================================"
-    echo ""
-
-    if [ -f "$response_time_stats_file" ]; then
-        printf "%-40s %8s %8s %8s %8s\n" "Website" "Samples" "Avg (ms)" "Min (ms)" "Max (ms)"
-        printf "%-40s %8s %8s %8s %8s\n" "$(printf '%40s' | tr ' ' '-')" "--------" "--------" "--------" "--------"
-        
-        while IFS='|' read -r website count avg_time min_time max_time; do
-            printf "%-40s %8d %8d %8d %8d\n" \
-                "$website" "$count" "$avg_time" "$min_time" "$max_time"
-        done < "$response_time_stats_file"
-    else
-        echo "No response time data found for the specified period."
-    fi
-
-    echo ""
-    echo "Report generated by Website Monitoring System v$REPORT_VERSION"
-    echo "================================================================================"
-}
-
-generate_csv_report() {
-    local start_date="$1"
-    local end_date="$2"
-    local availability_stats_file="$3"
-    local response_time_stats_file="$4"
-    
-    echo "# Website Monitoring Report - CSV Format"
-    echo "# Report Period: $start_date to $end_date"
-    echo "# Generated: $(date '+%Y-%m-%d %H:%M:%S')"
-    echo ""
-    
-    echo "# Availability Statistics"
-    echo "Website,Total Checks,Up Checks,Down Checks,Error Checks,Availability Percent"
-    
-    if [ -f "$availability_stats_file" ]; then
-        while IFS='|' read -r website total_checks up_checks down_checks error_checks availability_percent; do
-            echo "\"$website\",$total_checks,$up_checks,$down_checks,$error_checks,$availability_percent"
-        done < "$availability_stats_file"
+            
+            # 计算24小时统计数据
+            local day_checks=0
+            local day_up=0
+            local day_down=0
+            local day_total_time=0
+            local day_response_count=0
+            local uptime_percentage=0
+            
+            while IFS= read -r log_line; do
+                if [[ "$log_line" =~ \|$url\| ]]; then
+                    IFS='|' read -r log_timestamp log_level log_message log_url log_response_time log_status_code log_final_status <<< "$log_line"
+                    
+                    # 检查时间范围
+                    if [[ "$log_timestamp" > "$cutoff_time" ]]; then
+                        day_checks=$((day_checks + 1))
+                        
+                        case "$log_final_status" in
+                            UP|CONTENT_INITIAL|CONTENT_CHANGED|CONTENT_UNCHANGED)
+                                day_up=$((day_up + 1))
+                                ;;
+                            DOWN|TIMEOUT|ERROR)
+                                day_down=$((day_down + 1))
+                                ;;
+                        esac
+                        
+                        if [ "$log_response_time" -gt 0 ]; then
+                            day_total_time=$((day_total_time + log_response_time))
+                            day_response_count=$((day_response_count + 1))
+                        fi
+                    fi
+                fi
+            done < "$MAIN_LOG_FILE"
+            
+            # 计算可用性百分比
+            if [ "$day_checks" -gt 0 ]; then
+                uptime_percentage=$(( (day_up * 100) / day_checks ))
+            fi
+            
+            # 计算平均响应时间
+            local avg_response_time=0
+            if [ "$day_response_count" -gt 0 ]; then
+                avg_response_time=$((day_total_time / day_response_count))
+            fi
+            
+            # 输出分析结果
+            echo "$url|$name|$latest_status|$latest_response_time|$latest_timestamp|$status_color|$status_icon|$uptime_percentage|$avg_response_time|$day_checks" >> "$temp_file"
+            
+        done < "$website_configs"
     fi
     
-    echo ""
-    echo "# Response Time Statistics"
-    echo "Website,Sample Count,Average Response Time (ms),Minimum Response Time (ms),Maximum Response Time (ms)"
+    echo "$temp_file"
+}
+
+# 生成现代化HTML报告
+generate_final_html() {
+    local website_configs="$1"
+    local analysis_data="$2"
+    local current_time=$(date '+%Y-%m-%d %H:%M:%S')
     
-    if [ -f "$response_time_stats_file" ]; then
-        while IFS='|' read -r website count avg_time min_time max_time; do
-            echo "\"$website\",$count,$avg_time,$min_time,$max_time"
-        done < "$response_time_stats_file"
+    cat << 'EOF'
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站监控仪表板</title>
+    <style>
+        :root {
+            /* 现代化配色方案 */
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --secondary-color: #6b7280;
+            
+            /* 背景色 */
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            
+            /* 文字颜色 */
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            
+            /* 边框和阴影 */
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            /* 圆角 */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+        }
+        
+        /* 暗色主题 */
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        
+        /* 顶部导航栏 */
+        .navbar {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .navbar-brand .icon {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .navbar-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .navbar-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .navbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+        
+        .theme-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .refresh-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .refresh-spinner {
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid var(--border-color);
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 统计卡片网格 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .stat-card-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: white;
+        }
+        
+        .stat-card-icon.total { background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); }
+        .stat-card-icon.success { background: linear-gradient(135deg, var(--success-color), #059669); }
+        .stat-card-icon.danger { background: linear-gradient(135deg, var(--danger-color), #dc2626); }
+        .stat-card-icon.warning { background: linear-gradient(135deg, var(--warning-color), #d97706); }
+        
+        .stat-card-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .stat-card-change.positive { color: var(--success-color); }
+        .stat-card-change.negative { color: var(--danger-color); }
+        .stat-card-change.neutral { color: var(--text-secondary); }
+        
+        /* 网站监控卡片 */
+        .websites-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .section-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .website-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .website-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .website-card.status-success { border-left: 4px solid var(--success-color); }
+        .website-card.status-warning { border-left: 4px solid var(--warning-color); }
+        .website-card.status-danger { border-left: 4px solid var(--danger-color); }
+        .website-card.status-secondary { border-left: 4px solid var(--secondary-color); }
+        
+        .website-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .website-info h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .website-url {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .status-indicator.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status-indicator.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .status-indicator.danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .status-indicator.secondary {
+            background: rgba(107, 114, 128, 0.1);
+            color: var(--secondary-color);
+        }
+        
+        .website-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .last-check {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .navbar-controls {
+                justify-content: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .websites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .website-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navbar-brand .icon {
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.25rem;
+            }
+            
+            .navbar-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* 动画效果 */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.4s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="navbar fade-in">
+            <div class="navbar-brand">
+                <div class="icon">
+                    📊
+                </div>
+                <div>
+EOF
+
+    echo "                    <div class=\"navbar-title\">$FINAL_REPORT_TITLE</div>"
+    echo "                    <div class=\"navbar-subtitle\">实时监控 · 高效分析</div>"
+
+    cat << 'EOF'
+                </div>
+            </div>
+            <div class="navbar-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    🌙
+                </button>
+EOF
+
+    if [ "$FINAL_REFRESH_INTERVAL" -gt 0 ]; then
+        cat << EOF
+                <div class="refresh-status">
+                    <div class="refresh-spinner"></div>
+                    <span>自动刷新已启用</span>
+                </div>
+EOF
     fi
-}
 
-generate_html_report() {
-    local start_date="$1"
-    local end_date="$2"
-    local availability_stats_file="$3"
-    local response_time_stats_file="$4"
+    cat << 'EOF'
+            </div>
+        </nav>
+
+        <!-- 统计概览 -->
+        <div class="stats-grid fade-in">
+EOF
+
+    # 计算总体统计数据
+    local total_websites=0
+    local total_up=0
+    local total_down=0
+    local total_response_time=0
+    local response_count=0
     
-    echo "<!DOCTYPE html>"
-    echo "<html><head><title>Website Monitoring Report</title></head><body style='text-align:center'>"
-    echo "<h1>$REPORT_TITLE</h1>"
-    echo "<p>Report Period: $start_date to $end_date</p>"
-    echo "<p>Generated: $(date '+%Y-%m-%d %H:%M:%S')</p>"
-    
-    echo "<h2>Availability Summary</h2>"
-    if [ -f "$availability_stats_file" ]; then
-        echo "<table border='1' align='center'>"
-        echo "<tr><th>Website</th><th>Total</th><th>Up</th><th>Down</th><th>Error</th><th>Availability</th></tr>"
-        
-        while IFS='|' read -r website total_checks up_checks down_checks error_checks availability_percent; do
-            echo "<tr><td>$website</td><td>$total_checks</td><td>$up_checks</td><td>$down_checks</td><td>$error_checks</td><td>${availability_percent}%</td></tr>"
-        done < "$availability_stats_file"
-        
-        echo "</table>"
-    else
-        echo "<p>No availability data found.</p>"
+    if [ -f "$analysis_data" ]; then
+        while IFS='|' read -r url name status response_time timestamp color icon uptime avg_time checks; do
+            total_websites=$((total_websites + 1))
+            
+            case "$status" in
+                UP|CONTENT_INITIAL|CONTENT_UNCHANGED|CONTENT_CHANGED)
+                    total_up=$((total_up + 1))
+                    ;;
+                DOWN|TIMEOUT|ERROR)
+                    total_down=$((total_down + 1))
+                    ;;
+            esac
+            
+            if [ "$avg_time" -gt 0 ]; then
+                total_response_time=$((total_response_time + avg_time))
+                response_count=$((response_count + 1))
+            fi
+        done < "$analysis_data"
     fi
     
-    echo "<h2>Response Time Statistics</h2>"
-    if [ -f "$response_time_stats_file" ]; then
-        echo "<table border='1' align='center'>"
-        echo "<tr><th>Website</th><th>Samples</th><th>Avg (ms)</th><th>Min (ms)</th><th>Max (ms)</th></tr>"
-        
-        while IFS='|' read -r website count avg_time min_time max_time; do
-            echo "<tr><td>$website</td><td>$count</td><td>$avg_time</td><td>$min_time</td><td>$max_time</td></tr>"
-        done < "$response_time_stats_file"
-        
-        echo "</table>"
-    else
-        echo "<p>No response time data found.</p>"
+    local avg_response_time=0
+    if [ "$response_count" -gt 0 ]; then
+        avg_response_time=$((total_response_time / response_count))
     fi
     
-    echo "</body></html>"
+    local uptime_percentage=0
+    if [ "$total_websites" -gt 0 ]; then
+        uptime_percentage=$(( (total_up * 100) / total_websites ))
+    fi
+
+    cat << EOF
+            <div class="stat-card slide-up">
+                <div class="stat-card-header">
+                    <div class="stat-card-title">监控网站</div>
+                    <div class="stat-card-icon total">
+                        🌐
+                    </div>
+                </div>
+                <div class="stat-card-value">$total_websites</div>
+                <div class="stat-card-change neutral">
+                    ℹ️ 总计监控站点
+                </div>
+            </div>
+
+            <div class="stat-card slide-up">
+                <div class="stat-card-header">
+                    <div class="stat-card-title">正常运行</div>
+                    <div class="stat-card-icon success">
+                        ✅
+                    </div>
+                </div>
+                <div class="stat-card-value">$total_up</div>
+                <div class="stat-card-change positive">
+                    📈 ${uptime_percentage}% 可用性
+                </div>
+            </div>
+
+            <div class="stat-card slide-up">
+                <div class="stat-card-header">
+                    <div class="stat-card-title">异常状态</div>
+                    <div class="stat-card-icon danger">
+                        ⚠️
+                    </div>
+                </div>
+                <div class="stat-card-value">$total_down</div>
+                <div class="stat-card-change $([ $total_down -eq 0 ] && echo "positive" || echo "negative")">
+                    $([ $total_down -eq 0 ] && echo "✅ 全部正常" || echo "❌ 需要关注")
+                </div>
+            </div>
+
+            <div class="stat-card slide-up">
+                <div class="stat-card-header">
+                    <div class="stat-card-title">平均响应</div>
+                    <div class="stat-card-icon warning">
+                        ⏱️
+                    </div>
+                </div>
+                <div class="stat-card-value">${avg_response_time}ms</div>
+                <div class="stat-card-change $([ $avg_response_time -lt 1000 ] && echo "positive" || echo "warning")">
+                    $([ $avg_response_time -lt 1000 ] && echo "⚡ 响应良好" || echo "⏳ 响应较慢")
+                </div>
+            </div>
+        </div>
+
+        <!-- 网站详情 -->
+        <div class="websites-section fade-in">
+            <div class="section-header">
+                <div>
+                    <div class="section-title">网站监控详情</div>
+                    <div class="section-subtitle">实时状态 · 性能指标 · 历史数据</div>
+                </div>
+            </div>
+
+            <div class="websites-grid">
+EOF
+
+    # 生成网站卡片
+    if [ -f "$analysis_data" ]; then
+        while IFS='|' read -r url name status response_time timestamp color icon uptime avg_time checks; do
+            # 格式化状态显示
+            local status_text="$status"
+            case "$status" in
+                UP) status_text="正常运行" ;;
+                DOWN) status_text="服务离线" ;;
+                TIMEOUT) status_text="响应超时" ;;
+                ERROR) status_text="连接错误" ;;
+                CONTENT_CHANGED) status_text="内容变更" ;;
+                CONTENT_UNCHANGED) status_text="内容正常" ;;
+                CONTENT_INITIAL) status_text="初始检查" ;;
+                UNKNOWN) status_text="状态未知" ;;
+            esac
+            
+            # 格式化时间戳
+            local formatted_time="未知"
+            if [ -n "$timestamp" ]; then
+                formatted_time="$timestamp"
+            fi
+            
+            cat << EOF
+                <div class="website-card status-$color slide-up">
+                    <div class="website-header">
+                        <div class="website-info">
+                            <h3>$name</h3>
+                            <div class="website-url">$url</div>
+                        </div>
+                        <div class="status-indicator $color">
+                            <span>$icon</span>
+                            <span>$status_text</span>
+                        </div>
+                    </div>
+                    
+                    <div class="website-metrics">
+                        <div class="metric">
+                            <div class="metric-value">${uptime}%</div>
+                            <div class="metric-label">可用性</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">${avg_time}ms</div>
+                            <div class="metric-label">响应时间</div>
+                        </div>
+                    </div>
+                    
+                    <div class="last-check">
+                        🕒 最后检查: $formatted_time
+                    </div>
+                </div>
+EOF
+        done < "$analysis_data"
+    fi
+
+    cat << EOF
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 主题切换功能
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            
+            // 添加动画延迟
+            const cards = document.querySelectorAll('.slide-up');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+EOF
+
+    # 添加自动刷新功能
+    if [ "$FINAL_REFRESH_INTERVAL" -gt 0 ]; then
+        cat << EOF
+        
+        // 自动刷新功能
+        let refreshInterval = $FINAL_REFRESH_INTERVAL * 1000; // 转换为毫秒
+        
+        // 设置自动刷新
+        setTimeout(function() {
+            location.reload();
+        }, refreshInterval);
+        
+        // 页面可见性变化时重新设置刷新
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                setTimeout(function() {
+                    location.reload();
+                }, refreshInterval);
+            }
+        });
+EOF
+    fi
+
+    cat << 'EOF'
+    </script>
+</body>
+</html>
+EOF
 }
 
-generate_default_filename() {
-    local format="$1"
-    local timestamp=$(date '+%Y%m%d-%H%M%S')
-    
-    local extension=""
-    case "$format" in
-        text)
-            extension="txt"
-            ;;
-        html)
-            extension="html"
-            ;;
-        csv)
-            extension="csv"
-            ;;
-        *)
-            extension="txt"
-            ;;
-    esac
-    
-    echo "$DEFAULT_REPORTS_DIR/report-$timestamp.$extension"
-}
-
-cleanup_temp_files() {
-    local temp_pattern="$DATA_DIR/temp/*_$$.tmp"
-    rm -f $temp_pattern 2>/dev/null || true
-}
-
+# 主函数
 main() {
-    # Validate required commands
+    # 验证必要命令
     validate_required_commands
     
-    # Parse command line arguments
+    # 解析命令行参数
     parse_arguments "$@"
     
-    # Set up signal handlers for cleanup
-    trap cleanup_temp_files EXIT
-    
-    # Calculate date range
-    local date_range
-    date_range=$(calculate_date_range "$REPORT_PERIOD")
-    local start_date
-    local end_date
-    start_date=$(echo "$date_range" | cut -d'|' -f1)
-    end_date=$(echo "$date_range" | cut -d'|' -f2)
-    
-    if [ "$REPORT_VERBOSE" = true ]; then
-        log_info "Generating $REPORT_FORMAT report for period: $start_date to $end_date"
-        if [ -n "$REPORT_WEBSITE" ]; then
-            log_info "Filtering for website: $REPORT_WEBSITE"
-        fi
+    if [ "$FINAL_VERBOSE" = true ]; then
+        log_info "开始生成现代化HTML报告..."
     fi
     
-    # Parse log data
-    local monitoring_data_file
-    monitoring_data_file=$(parse_monitoring_logs "$start_date" "$end_date" "$REPORT_WEBSITE")
+    # 确保输出目录存在
+    ensure_directory "$(dirname "$FINAL_OUTPUT_FILE")"
     
-    # Calculate statistics
-    local availability_stats_file
-    local response_time_stats_file
+    # 获取网站配置
+    local website_configs
+    website_configs=$(get_website_configs)
     
-    availability_stats_file=$(calculate_availability_stats "$monitoring_data_file" "$REPORT_WEBSITE")
-    response_time_stats_file=$(calculate_response_time_stats "$monitoring_data_file" "$REPORT_WEBSITE")
+    # 分析监控数据
+    local analysis_data
+    analysis_data=$(analyze_monitoring_data "$website_configs")
     
-    # Generate report based on format
-    local output_content=""
-    case "$REPORT_FORMAT" in
-        text)
-            output_content=$(generate_text_report "$start_date" "$end_date" "$availability_stats_file" "$response_time_stats_file")
-            ;;
-        html)
-            output_content=$(generate_html_report "$start_date" "$end_date" "$availability_stats_file" "$response_time_stats_file")
-            ;;
-        csv)
-            output_content=$(generate_csv_report "$start_date" "$end_date" "$availability_stats_file" "$response_time_stats_file")
-            ;;
-    esac
+    # 生成HTML报告
+    generate_final_html "$website_configs" "$analysis_data" > "$FINAL_OUTPUT_FILE"
     
-    # Determine output file
-    local final_output_file="$REPORT_OUTPUT_FILE"
-    if [ -z "$final_output_file" ]; then
-        # Generate default filename with timestamp
-        final_output_file=$(generate_default_filename "$REPORT_FORMAT")
-        
-        # Ensure reports directory exists
-        ensure_directory "$DEFAULT_REPORTS_DIR"
-        
-        if [ "$REPORT_VERBOSE" = true ]; then
-            log_info "No output file specified, using default: $final_output_file"
-        fi
-    fi
+    # 清理临时文件
+    rm -f "$website_configs" "$analysis_data"
     
-    # Output report
-    if [ -n "$final_output_file" ]; then
-        # Ensure output directory exists
-        ensure_directory "$(dirname "$final_output_file")"
-        
-        echo "$output_content" > "$final_output_file"
-        
-        if [ "$REPORT_VERBOSE" = true ]; then
-            log_info "Report saved to: $final_output_file"
-        else
-            echo "Report saved to: $final_output_file"
-        fi
+    if [ "$FINAL_VERBOSE" = true ]; then
+        log_info "现代化HTML报告已生成: $FINAL_OUTPUT_FILE"
     else
-        echo "$output_content"
-    fi
-    
-    if [ "$REPORT_VERBOSE" = true ]; then
-        log_info "Report generation completed successfully"
+        echo "现代化报告已生成: $FINAL_OUTPUT_FILE"
     fi
 }
 
-# Execute main function with all arguments
+# 执行主函数
 main "$@"

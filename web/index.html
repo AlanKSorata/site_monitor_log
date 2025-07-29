@@ -1,18 +1,275 @@
 <!DOCTYPE html>
-<html><head><title>Website Monitoring Report</title></head><body style='text-align:center'>
-<h1>Website Monitoring Report</h1>
-<p>Report Period: 2025-07-29 to 2025-07-29</p>
-<p>Generated: 2025-07-29 11:46:54</p>
-<h2>Availability Summary</h2>
-<table border='1' align='center'>
-<tr><th>Website</th><th>Total</th><th>Up</th><th>Down</th><th>Error</th><th>Availability</th></tr>
-<tr><td>https://www.baidu.com</td><td>6</td><td>6</td><td>0</td><td>0</td><td>100%</td></tr>
-<tr><td>https://www.bilibili.com</td><td>5</td><td>5</td><td>0</td><td>0</td><td>100%</td></tr>
-</table>
-<h2>Response Time Statistics</h2>
-<table border='1' align='center'>
-<tr><th>Website</th><th>Samples</th><th>Avg (ms)</th><th>Min (ms)</th><th>Max (ms)</th></tr>
-<tr><td>https://www.baidu.com</td><td>5</td><td>200</td><td>200</td><td>200</td></tr>
-<tr><td>https://www.bilibili.com</td><td>5</td><td>200</td><td>200</td><td>200</td></tr>
-</table>
-</body></html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网站监控系统</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(20px);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        color: #64748b;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .main-card {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        margin-bottom: 2rem;
+      }
+
+      .main-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .main-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1rem;
+      }
+
+      .main-card p {
+        color: #64748b;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .features {
+        list-style: none;
+        margin-bottom: 2rem;
+      }
+
+      .features li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        color: #475569;
+      }
+
+      .features li::before {
+        content: "✓";
+        color: #10b981;
+        font-weight: bold;
+      }
+
+      .main-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+      }
+
+      .main-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      .api-section {
+        background: #f8fafc;
+        border-radius: 16px;
+        padding: 2rem;
+        border: 1px solid #e2e8f0;
+      }
+
+      .api-section h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1rem;
+      }
+
+      .api-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .api-link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .api-link:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .api-icon {
+        width: 2rem;
+        height: 2rem;
+        background: #667eea;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.9rem;
+      }
+
+      .api-link:hover .api-icon {
+        background: white;
+        color: #667eea;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #e2e8f0;
+        color: #64748b;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
+        .container {
+          padding: 2rem;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>网站监控系统</h1>
+        <p>现代化的网站监控解决方案，提供实时状态监控、性能分析和可视化报告</p>
+      </div>
+
+      <div class="main-card">
+        <h3>📊 监控报告</h3>
+        <p>
+          现代化的网站监控报告，采用最新设计趋势，支持深色/浅色主题切换，具有流畅的动画效果和响应式设计。
+        </p>
+        <ul class="features">
+          <li>现代化UI设计</li>
+          <li>深色/浅色主题</li>
+          <li>流畅动画效果</li>
+          <li>响应式布局</li>
+          <li>实时数据更新</li>
+          <li>自动刷新功能</li>
+        </ul>
+        <a href="latest-report.html" class="main-link"> 查看监控报告 → </a>
+      </div>
+
+      <div class="api-section">
+        <h3>🔌 API 接口</h3>
+        <div class="api-links">
+          <a href="api/status.json" class="api-link">
+            <div class="api-icon">📊</div>
+            <div>
+              <div style="font-weight: 600">系统状态</div>
+              <div style="font-size: 0.8rem; opacity: 0.7">
+                获取监控系统运行状态
+              </div>
+            </div>
+          </a>
+
+          <a href="api/websites.json" class="api-link">
+            <div class="api-icon">🌐</div>
+            <div>
+              <div style="font-weight: 600">网站列表</div>
+              <div style="font-size: 0.8rem; opacity: 0.7">
+                获取所有监控网站信息
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>网站监控系统 v2.0 | 现代化设计 | 实时监控</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem">
+          生成时间: <span id="current-time"></span>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // 显示当前时间
+      document.getElementById("current-time").textContent =
+        new Date().toLocaleString("zh-CN");
+
+      // 添加页面加载动画
+      document.addEventListener("DOMContentLoaded", function () {
+        const card = document.querySelector(".main-card");
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "all 0.6s ease";
+
+        setTimeout(() => {
+          card.style.opacity = "1";
+          card.style.transform = "translateY(0)";
+        }, 200);
+      });
+    </script>
+  </body>
+</html>

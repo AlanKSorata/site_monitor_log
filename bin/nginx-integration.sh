@@ -180,11 +180,11 @@ setup_dev_environment() {
 generate_dev_report() {
     log_info "生成开发环境报告..."
     
-    # 生成HTML格式的报告
+    # 生成现代化HTML格式的报告
     "$PROJECT_ROOT/bin/report-generator.sh" \
-        --format html \
-        --period daily \
-        --output "$NGINX_WEB_ROOT/latest-report.html" 2>/dev/null || {
+        --output "$NGINX_WEB_ROOT/latest-report.html" \
+        --refresh 300 \
+        --title "网站监控仪表板" 2>/dev/null || {
         
         # 如果报告生成失败，创建一个简单的测试页面
         cat > "$NGINX_WEB_ROOT/latest-report.html" << 'EOF'
@@ -457,11 +457,11 @@ EOF
 generate_initial_report() {
     log_info "生成初始HTML报告..."
     
-    # 生成HTML格式的报告
+    # 生成现代化HTML格式的报告
     "$PROJECT_ROOT/bin/report-generator.sh" \
-        --format html \
-        --period daily \
-        --output "$NGINX_WEB_ROOT/latest-report.html"
+        --output "$NGINX_WEB_ROOT/latest-report.html" \
+        --refresh 300 \
+        --title "网站监控仪表板"
     
     # 创建首页链接（如果符号链接失败，则复制文件）
     if ! ln -sf latest-report.html "$NGINX_WEB_ROOT/index.html" 2>/dev/null; then
@@ -481,11 +481,11 @@ update_reports() {
     local report_file="$NGINX_WEB_ROOT/latest-report.html"
     local archive_file="$NGINX_REPORTS_DIR/report-$(date '+%Y%m%d-%H%M%S').html"
     
-    # 生成新的HTML报告
+    # 生成新的现代化HTML报告
     "$PROJECT_ROOT/bin/report-generator.sh" \
-        --format html \
-        --period daily \
         --output "$report_file" \
+        --refresh "$NGINX_UPDATE_INTERVAL" \
+        --title "网站监控仪表板" \
         ${NGINX_VERBOSE:+--verbose}
     
     # 归档旧报告
