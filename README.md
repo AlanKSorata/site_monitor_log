@@ -21,7 +21,7 @@ A comprehensive, lightweight website monitoring solution built with shell script
 
 ### System Requirements
 
-- Unix/Linux environment (tested on Ubuntu, CentOS, macOS)
+- Unix/Linux environment (tested on Ubuntu)
 - Bash 4.0 or higher
 - Standard POSIX utilities
 
