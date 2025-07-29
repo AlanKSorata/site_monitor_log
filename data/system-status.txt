@@ -1,0 +1,7 @@
+System Status: STOPPED
+Last Updated: 2025-07-29 09:52:58
+Message: System stopped successfully
+Configuration Directory: /mnt/e/pro_oriented/learn/tmp_space/config
+Data Directory: /mnt/e/pro_oriented/learn/tmp_space/data
+Monitor Config: /mnt/e/pro_oriented/learn/tmp_space/config/monitor.conf
+Websites Config: /mnt/e/pro_oriented/learn/tmp_space/config/websites.conf
