@@ -1,0 +1,143 @@
+/* 网站监控系统样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 15px;
+}
+
+h2 {
+    color: #34495e;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.report-info {
+    background: #ecf0f1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.report-info p {
+    margin: 5px 0;
+    color: #7f8c8d;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+.status-up {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.status-down {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.status-warning {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.availability-high {
+    background-color: #d5f4e6;
+    color: #27ae60;
+}
+
+.availability-medium {
+    background-color: #fef9e7;
+    color: #f39c12;
+}
+
+.availability-low {
+    background-color: #fadbd8;
+    color: #e74c3c;
+}
+
+.response-time-good {
+    color: #27ae60;
+}
+
+.response-time-slow {
+    color: #f39c12;
+}
+
+.response-time-critical {
+    color: #e74c3c;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.refresh-info {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #3498db;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 8px;
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "status": "running",
+    "last_update": "2025-07-29 11:48:47",
+    "next_update": "2025-07-29 11:53:47",
+    "update_interval": 300,
+    "total_websites": 2,
+    "websites_up": 2,
+    "websites_down": 0,
+    "average_response_time": 150
+}

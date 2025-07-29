@@ -1,0 +1,20 @@
+{
+    "websites": [
+        {
+            "url": "https://www.baidu.com",
+            "name": "百度",
+            "interval": 60,
+            "timeout": 10,
+            "content_check": true
+        },
+        {
+            "url": "https://www.google.com",
+            "name": "Google",
+            "interval": 60,
+            "timeout": 10,
+            "content_check": false
+        }
+    ],
+    "last_update": "$timestamp",
+    "total_count": 2
+}

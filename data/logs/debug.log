@@ -200,3 +200,29 @@
 2025-07-29 09:52:20|DEBUG|Executing HTTP check for https://test.example.com (attempt 4/4)|error-recovery|
 2025-07-29 09:52:20|DEBUG|Recovery event logged: RETRY_EXHAUSTED for HTTP check for https://test.example.com|error-recovery|
 2025-07-29 09:52:20|DEBUG|Recovery event logged: CIRCUIT_FAILURE for WEBSITE_CHECK_https___test_example_com|error-recovery|
+2025-07-29 10:14:23|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-29 10:14:23|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-29 10:14:23|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-29 10:14:23|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-29 10:14:23|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-29 10:14:23|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-29 10:14:24|DEBUG|Executing HTTP check for https://www.baidu.com (attempt 1/4)|error-recovery|
+2025-07-29 10:14:24|DEBUG|Executing HTTP check for https://www.bilibili.com (attempt 1/4)|error-recovery|
+2025-07-29 10:14:24|DEBUG|Response time logged: 348ms for https://www.baidu.com|advanced-monitoring|
+2025-07-29 10:14:24|DEBUG|Response time logged: 438ms for https://www.bilibili.com|advanced-monitoring|
+2025-07-29 10:14:24|DEBUG|Executing Content fetch for https://www.baidu.com (attempt 1/4)|error-recovery|
+2025-07-29 10:14:25|DEBUG|Content fetched successfully: https://www.baidu.com -> /tmp/tmp.TlXspWSnlq|http-utils|
+2025-07-29 10:53:22|DEBUG|Log level changed: INFO -> DEBUG||
+2025-07-29 10:53:22|DEBUG|Data directory structure created successfully||
+2025-07-29 11:15:41|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-29 11:15:41|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-29 11:15:41|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-29 11:15:41|DEBUG|Advanced monitoring system initialized|advanced-monitoring|
+2025-07-29 11:15:41|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-29 11:15:41|DEBUG|Error recovery system initialized|error-recovery|
+2025-07-29 11:15:42|DEBUG|Executing HTTP check for https://www.baidu.com (attempt 1/4)|error-recovery|
+2025-07-29 11:15:42|DEBUG|Executing HTTP check for https://www.bilibili.com (attempt 1/4)|error-recovery|
+2025-07-29 11:15:42|DEBUG|Response time logged: 318ms for https://www.baidu.com|advanced-monitoring|
+2025-07-29 11:15:42|DEBUG|Response time logged: 391ms for https://www.bilibili.com|advanced-monitoring|
+2025-07-29 11:15:42|DEBUG|Executing Content fetch for https://www.baidu.com (attempt 1/4)|error-recovery|
+2025-07-29 11:15:43|DEBUG|Content fetched successfully: https://www.baidu.com -> /tmp/tmp.qZKJl1x3Z9|http-utils|

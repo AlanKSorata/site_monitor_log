@@ -1,0 +1,33 @@
+[Unit]
+Description=Website Monitor Nginx Integration Service
+Documentation=https://github.com/your-repo/website-monitoring-system
+After=network.target nginx.service
+Wants=nginx.service
+
+[Service]
+Type=forking
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/website-monitoring-system
+ExecStart=/opt/website-monitoring-system/bin/nginx-integration.sh start --interval 300
+ExecStop=/opt/website-monitoring-system/bin/nginx-integration.sh stop
+ExecReload=/bin/kill -HUP $MAINPID
+PIDFile=/opt/website-monitoring-system/data/nginx-integration.pid
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# 安全设置
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/website-monitoring-system/data /var/www/website-monitor
+
+# 资源限制
+LimitNOFILE=65536
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target
