@@ -2,21 +2,6 @@
 
 本指南提供了网站监控系统 nginx 集成的完整解决方案，包括开发环境和生产环境的部署方法。
 
-## 🚨 问题解决
-
-### 原始问题
-
-- nginx 配置语法错误
-- 权限问题导致无法访问
-- MIME 类型重复警告
-
-### 解决方案
-
-我们提供了两种部署方案：
-
-1. **开发环境**: 使用简单 HTTP 服务器，无需 root 权限
-2. **生产环境**: 使用修复后的 nginx 配置
-
 ## 🛠️ 开发环境部署（推荐用于测试）
 
 ### 1. 初始化环境
@@ -80,37 +65,6 @@ sudo ./bin/fix-nginx-config.sh test
 
 # 启动nginx集成服务
 sudo systemctl start website-monitor-nginx
-```
-
-## 📁 文件结构
-
-### 开发环境文件结构
-
-```
-web/
-├── index.html              # 主页
-├── latest-report.html      # 最新报告
-├── api/
-│   ├── status.json        # 系统状态API
-│   └── websites.json      # 网站列表API
-├── assets/
-│   └── style.css          # CSS样式
-├── error-pages/
-│   ├── 404.html
-│   └── 50x.html
-└── reports/               # 历史报告目录
-```
-
-### 生产环境文件结构
-
-```
-/var/www/website-monitor/
-├── index.html
-├── latest-report.html
-├── api/
-├── assets/
-├── error-pages/
-└── reports/
 ```
 
 ## 🔧 管理命令
@@ -208,36 +162,6 @@ tail -f data/logs/monitor.log
 # 系统服务日志
 sudo journalctl -u website-monitor-nginx -f
 ```
-
-## 📊 性能优化
-
-### 开发环境
-
-- 使用 Python3 内置 HTTP 服务器
-- 支持实时文件更新
-- 无需重启即可看到更改
-
-### 生产环境
-
-- nginx 高性能 Web 服务器
-- 静态资源缓存
-- Gzip 压缩
-- 安全头设置
-
-## 🔒 安全特性
-
-### 开发环境
-
-- 仅本地访问
-- 简单 HTTP 协议
-- 适合开发和测试
-
-### 生产环境
-
-- 安全 HTTP 头
-- 敏感文件访问控制
-- 错误页面处理
-- 可配置访问控制
 
 ## 🚀 快速开始
 
