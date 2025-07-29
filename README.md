@@ -2,6 +2,8 @@
 
 A comprehensive, lightweight website monitoring solution built with shell scripts that provides benign monitoring capabilities without complex dependencies.
 
+![alt text](./assets/image.png)
+
 ## 🚀 Features
 
 - **Multi-Website Monitoring**: Monitor multiple websites simultaneously with configurable intervals
